@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../css/css.css" rel="stylesheet" type="text/css" />
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/area_data.js"></script>
+    <script src="../js/Exect.js"></script>
+    <script src="../js/jquery.form.min.js"></script>
+    <script>
+        var adr = '';//地址
+        var Sage = '';//年龄
+        var Eage = '';//年龄
+        var Ssg = '';//身高
+        var Esg = '';//身高
+        var hyzt = '';//婚姻状态
+        $(function () {
+            //检查是否登录
+            var pd = { "t": "9" };
+            $.ajax({
+                type: "post",
+                url: "../tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        $('#zh').show();
+                        $('#out').show();
+                        $('#login').hide();
+                        $('#news').show();
+                        $('#myneiCon').show();
+                        $('#bottom').css('width', '798px');
+                    }
+                    else {
+                        $('#zh').hide();
+                        $('#out').hide();
+                        $('#myneiCon').hide();
+                        $('#login').show();
+                        //$('#neirong').css('float', 'none');
+                        $('#news').hide();
+                        $('#bottom').css('width', '627px');
+                        $('#mynei').html('<img src="../img/ren.png" style="width:150px;height:197px;" /><img src="../img/ren.png" style="width:150px;height:197px;" /><img src="../img/ren.png" style="width:150px;height:197px;" /><img src="../img/ren.png" style="width:150px;height:197px;" />');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+            //查询基本信息
+            var pd = { "t": "3" };
+            $.ajax({
+                //传递方式为post，处理页为Handler.ashx
+                type: "post",
+                url: "../tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        //格式化后台传递过来的值
+                        var dataobj = eval("(" + data.status + ")");
+                        //循环后台传递过来的值
+                        $.each(dataobj.root, function (i, item) {
+                            //设置图片
+                            $('#previewImage').attr('src', '../../' + item.PhotoPath);
+                            //设置用户名
+                            $('#UserDes').append('<div class="userLine">用户名：' + item.UserName + '</div>');
+                            //设置昵称
+                            $('#UserDes').append('<div class="userLine">昵称：' + item.NickName + '</div>');
+                            //设置性别
+                            $('#UserDes').append('<div class="userLine">性别：' + item.Sex + '</div>');
+                            //设置生日
+                            $('#UserDes').append('<div class="userLine">生日：' + item.BirthDay + '</div>');
+                            //设置学历
+                            $('#UserDes').append('<div class="userLine">学历：' + item.Education + '</div>');
+                            //设置身高
+                            $('#UserDes').append('<div class="userLine">身高：' + item.Stature + '</div>');
+                            //设置体重
+                            $('#UserDes').append('<div class="userLine">体重：' + item.Avoirdupois + '</div>');
+                            //设置收入
+                            $('#UserDes').append('<div class="userLine">收入：' + item.Earning + '</div>');
+                            //设置地区
+                            $('#zODes').append('<div class="userLine">地区：' + item.FriendCome.replace('0', '') + '</div>');
+                            adr = item.FriendCome;
+                            //设置年龄
+                            $('#zODes').append('<div class="userLine">年龄：' + item.FriendAgeStar + '到' + item.FriendAgeEnd + '</div>');
+                            Sage = item.FriendAgeStar;
+                            Eage = item.FriendAgeEnd;
+                            //设置身高
+                            $('#zODes').append('<div class="userLine">身高：' + item.FriendStatureStar + '到' + item.FriendStatureEnd + '</div>');
+                            Ssg = item.FriendStatureStar;
+                            Esg = item.FriendStatureEnd;
+                            //设置婚姻状态
+                            $('#zODes').append('<div class="userLine">婚姻状态：' + item.FriendMarriage + '</div>');
+                            hyzt = item.FriendMarriage;
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+            //查询用户名
+            var pd = { "t": "4" };
+            $.ajax({
+                type: "post",
+                url: "../tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            $('#UserDes').append('<div class="userLine">用户名：' + item.UserName + '</div>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+            SelectF();
+            for (var age = 18; age <= 80; age++) {
+                $('#sAge').append("<option value=\"" + age + "\">" + age + "</option>");
+                if (age == 80) {
+                    $('#eAge').append("<option selected value=\"" + age + "\">" + age + "</option>");
+                }
+                else {
+                    $('#eAge').append("<option value=\"" + age + "\">" + age + "</option>");
+                }
+            }
+            serach();
+
+        });
+        //查询好友
+        function SelectF() {
+            var pd = { "t": "5" };
+            $.ajax({
+                type: "post",
+                url: "../tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    $('#py').empty();
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            $('#py').append('<div class="userLine" onclick="siliao(\'' + item.UserName + '\')" style="width:140px;height:80px;cursor:pointer;"><div style="float:left;"><img src="' + '../../' + item.PhotoPath + '" style="width:50px;height:50px;border-radius:50px;"/></div><div style="float:left;"><font style="margin-top:20px;display:block;">&nbsp;昵称：' + item.NickName + '</font></div></div>');
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //省市变更事件
+        function shenchange(a) {
+            aaa(a, document.getElementById('sltCity'));
+        }
+        //查询事件
+        function serach() {
+            $('#people').empty();
+            var sex = $('#sex').val();
+            var FAgeStar = $('#sAge').val();
+            var FAgeEnd = $('#eAge').val();
+            var Address = $('#sltCity').val();
+            var addshang = $('#sltState').val();
+            if (Address == "0")
+            {
+                Address = addshang;
+            }
+            if (Address == "0")
+            {
+                Address = '';
+            }
+            var pd = { "t": "6", "sex": sex, "FAgeStar": FAgeStar, "FAgeEnd": FAgeEnd, "Address": Address };
+            $.ajax({
+                type: "post",
+                url: "../tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            //多一个增加20%；
+                            var tdz = item.Address;
+                            var tage = new Date().getYear() - new Date(item.BirthDay).getYear();//年龄
+
+                            var tsg = item.Stature;
+                            var thyzt = item.Marriage;
+                            var s = 0;
+                            var bgimg = '25.png';
+                            if (tdz == adr) {
+                                s += 25;
+                                bgimg = '25.png';
+                            }
+                            if (tage >= parseInt(Sage) && tage <= parseInt(Eage)) {
+                                s += 25;
+                            }
+                            if (tsg >= parseInt(Ssg) && tsg <= parseInt(Esg)) {
+                                s += 25;
+                            }
+                            if (hyzt == thyzt) {
+                                s += 25;
+                            }
+                            if (s == 50) {
+                                bgimg = '50.png';
+                            }
+                            if (s == 75) {
+                                bgimg = '75.png';
+                            }
+                            if (s == 100) {
+                                bgimg = '100.png';
+                            }
+
+                            var div = '<div style="height:160px; float:left; margin-left:50px;margin-top:10px;">' +
+                                        '<img src="' + '../../' + item.PhotoPath + '" style="width:120px;height:140px;float:left;" onclick="look(\'' + item.UserName + '\')" />' +
+                                        '<div style="float:left;margin-left:8px; width:110px;font-size:15px;">' +
+                                        '    <div style="height:25px;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:160px;">' + item.NickName + '</div>' +
+                                        '    <div style="height:20px;font-size:14px;">' + item.Stature + 'cm &nbsp;' + item.Education + '</div>' +
+                                        '    <div style="height:70px;"><div style="width:72px;height:75px;background-image:url(../img/' + bgimg + ');padding-top:5px;"><div style="margin-top:15px;margin-left:10px;font-size:7px;"></div><div style="margin-top:15px;margin-left:25px;color:rgb(255, 106, 0);font-size:14px;"></div></div></div>' +
+                                        '    <div style="height:25px;margin-top:10px;">' +
+                                        '        <img src="../img/私信.png" style="margin-left:20px;"  onclick="siliao(\'' + item.UserName + '\')"  /> ' +
+                                        '    </div>' +
+                                        '</div>' +
+                                    '</div>';
+                            $('#people').append(div);
+                        });
+
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //点击私聊
+        function siliao(a) {
+            EjectIdent('../siliao.html?uname=' + a, '', 308, 307);
+            $('#CloseCover').html('<img src="../img/X.png" style="margin-top:5px;margom-left:10px;" />');
+
+        }
+        //点击修改自己的信息
+        function UpdateMy() {
+            EjectIdent('LoginUpdate.aspx', '', 695, 600);
+        }
+        //退出
+        function out() {
+            window.location.href = 'out.html';
+        }
+        //登录
+        function login() {
+            window.location.href = '../login.html';
+        }
+        //查看详细信息
+        function look(a) {
+            EjectIdent('FriendDetail.aspx?uname=' + a, '', 760, 530);
+        }
+        //查看消息
+        function news() {
+            EjectIdent('FriendMsg.aspx', '', 790, 530);
+        }
+        //上传照片
+        function fileUp() {
+            //提交id为form1的表单，提交到UploadImage.ashx，提交方式为post
+            $("#form1").ajaxSubmit({
+                url: 'UploadImage.ashx',
+                type: "post",
+                success: function (data) {
+                    //如果从后台返回的不是"上传失败"，则设置图片的路径，之后隐藏，之后在2000毫秒的时间
+                    //进行动画显示
+                    if (data != "上传失败") {
+                        $("#previewImage").attr("src", "../../uploadimages/" + data).hide().fadeIn(2000);
+                    }
+                    else {
+                        alert("上传失败");
+                    }
+                }
+            });
+        }
+    </script>
+    <style>
+        .userLine {
+            height: 23px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            width:160px;
+        }
+
+        .file {
+            position: relative;
+            display: inline-block;
+            background: #D0EEFF;
+            border: 1px solid #99D3F5;
+            border-radius: 4px;
+            padding: 4px 12px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            background-image:url(../img/上传照片.png);
+            background-size:50px 15px;
+        }
+
+            .file input {
+                position: absolute;
+                font-size: 12px;
+                right: 0;
+                top: 0;
+                opacity: 0;
+            }
+    </style>
+</head>
+<body style="background-color:#fafafa;">
+
+    <div style="width: 800px; margin: auto;">
+        <div style="float: left; position:relative; ">
+            <img src="../img/页眉.png" />
+            <font id="zh" style="position:absolute;top:10px;left:500px;cursor:pointer;font-size:14px;" onclick="UpdateMy()">账号:54941654978</font>
+            <font id="out" style="cursor:pointer;position:absolute;top:10px;right:10px;font-size:14px;" onclick="out()">【退出】</font>
+            <font id="login" style="cursor:pointer;position:absolute;top:10px;right:10px;font-size:14px;" onclick="login()">【登录】</font>
+            <font id="news" style="cursor:pointer;position:absolute;top:10px;right:325px;font-size:14px;" onclick="news()">【消息】</font>
+        </div>
+    </div>
+    
+    <div style="width:800px;margin:auto;">
+        <div id="mynei" style="float:left; width:168px;padding-left:30px;margin-right:2px;background-color:#f3f3f3">
+            <div style="border-right:1px solid #bebebe;height:800px;overflow-y:auto; overflow-x:hidden;">
+                <div>
+                    <img id="previewImage" src="images/login_03.gif" style="height:100px;width:100px;border-radius:100px;" />
+                    <form id="form1" method="post" enctype="multipart/form-data" action="UploadImage.ashx" >
+                        <div class="file" style="width:25px;height:8px;text-align:center;margin-top:10px;margin-left:27px;">
+                            <input type="file" value="上传照片" id="uploadImage" name="uploadImage" onchange="fileUp()" />
+                        </div>
+                    </form>
+                </div>
+                <div style="font-weight:800;font-size:12px;margin-bottom:10px;">基础信息</div>
+                <div id="UserDes" style="width:135px; height:200px; ">
+                </div>
+                <div style="font-weight:800;font-size:12px;margin-bottom:10px;">择偶标准</div>
+                <div id="zODes" style="width:135px; height:110px; ">
+                </div>
+                <div style="font-weight:800;font-size:12px;margin-bottom:10px;">好友组</div>
+                <div id="py" style="width:135px;">
+
+                </div>
+            </div>
+
+        </div>
+        <div id="neirong" style="float:left; width:597px; margin:auto;height:800px;overflow-y:auto; overflow-x:hidden;background-color:#f3f3f3">
+            <div style="font-size:12px;line-height:30px;">
+                <font style="margin-left:15px;font-size:12px;">你要找</font>
+                <select id="sex" style="background-color:#2f1010;color:#fff;height:18px;border: none;"><option value="男" style="font-size:12px;">男</option><option value="女" style="font-size:12px;">女</option></select>
+                <font style="margin-left:10px;font-size:12px;">年龄</font>
+                <select id="sAge" style="background-color:#2f1010;color:#fff;height:18px;border:none;"></select>
+                <font style="margin-left:10px;">-</font>
+                <select id="eAge" style="background-color:#2f1010;color:#fff;height:18px;border:none;"></select>
+                <font style="margin-left:10px;font-size:12px;">地区</font>
+                <select id="sltState" onchange="shenchange(this)" style="font-size:12px;background-color:#2f1010;color:#fff;height:18px;border:none;">
+                    <option selected="selected" value="0" >==省不限==</option>
+                    <option value="北京市">北京市</option>
+                    <option value="上海市">上海市</option>
+                    <option value="天津市">天津市</option>
+                    <option value="重庆市">重庆市</option>
+                    <option value="河北省">河北省</option>
+                    <option value="山西省">山西省</option>
+                    <option value="辽宁省">辽宁省</option>
+                    <option value="吉林省">吉林省</option>
+                    <option value="黑龙江省">黑龙江省</option>
+                    <option value="江苏省">江苏省</option>
+                    <option value="浙江省">浙江省</option>
+                    <option value="安徽省">安徽省</option>
+                    <option value="福建省">福建省</option>
+                    <option value="江西省">江西省</option>
+                    <option value="山东省">山东省</option>
+                    <option value="河南省">河南省</option>
+                    <option value="湖北省">湖北省</option>
+                    <option value="湖南省">湖南省</option>
+                    <option value="广东省">广东省</option>
+                    <option value="海南省">海南省</option>
+                    <option value="四川省">四川省</option>
+                    <option value="贵州省">贵州省</option>
+                    <option value="云南省">云南省</option>
+                    <option value="陕西省">陕西省</option>
+                    <option value="甘肃省">甘肃省</option>
+                    <option value="青海省">青海省</option>
+                    <option value="内蒙古自治区">内蒙古自治区</option>
+                    <option value="广西壮族自治区">广西壮族自治区</option>
+                    <option value="西藏自治区">西藏自治区</option>
+                    <option value="宁夏回族自治区">宁夏回族自治区</option>
+                    <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                    <option value="其他">其他</option>
+                </select>
+                <select id="sltCity"  style="background-color:#2f1010;color:#fff;height:18px; width:100px;border: none;">
+                    <option selected="selected" value="0" style="font-size:12px;">==城市不限==</option>
+                </select>
+                <input type="button" onclick="serach()" style="font-size:12px;background-image:url(../img/ss.png);width:40px;border:none;margin-left:20px;" />
+            </div>
+            <div style="font-size:18px;font-weight:800; padding-left:30px;line-height:50px;font-size:12px;">
+                查询伴侣
+            </div>
+            <div id="people">
+
+                <!--<div style="height:180px; float:left; margin-left:45px;margin-top:20px;">
+                    <img src="images/duihua.JPG" style="width:150px;height:180px;float:left;" />
+                    <div style="float:left;margin-left:8px; width:110px;font-size:15px;">
+                        <div style="height:25px;">昵称</div>
+                        <div style="height:25px;">生日：2015-8-8</div>
+                        <div style="height:25px;">吉林</div>
+                        <div style="height:25px;">身高156cm</div>
+                        <div style="height:25px;">体重60kg</div>
+                        <div style="height:25px;">高中学历</div>
+                        <div style="height:25px;">
+                            <input type="button" value="私聊" />
+                            <a style="font-size:10px;color:#1e9eff">查看详情</a>
+                        </div>
+                    </div>
+                </div>-->
+
+            </div>
+        </div>
+    </div>
+    <div style="height:5px;width:100%;clear:both;"></div>
+    <div style="height:100px;width:800px;margin:auto;background-color:#f1f1f1;clear:both;font-size:12px;">
+        <div style="padding-top:40px;padding-left:80px;float:left;">软件下载</div>
+        <div style="padding-top:40px;padding-left:50px;float:left;">开放平台</div>
+        <div style="padding-top:40px;padding-left:50px;float:left;">联系我们</div>
+        <div style="padding-top:40px;padding-left:50px;float:left;">在线客服</div>
+        <div style="padding-top:40px;padding-left:50px;float:left;">站长统计</div>
+        <div style="padding-top:40px;padding-left:50px;float:left;">版权声明</div>
+        <div style="padding-top:40px;padding-left:50px;float:left;">商务合作</div>
+    </div>
+</body>
+</html>

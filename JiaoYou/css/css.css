@@ -1,0 +1,153 @@
+body {
+    font-family: '微软雅黑',Arial, Helvetica, sans-serif;
+    padding-right: 0px;
+    padding-left: 0px;
+    font-size: 12px;
+    padding-bottom: 0px;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+td {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+th {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.huise {
+    font-family: "宋体";
+    font-size: 12px;
+    font-style: normal;
+    line-height: 22px;
+    color: #666666;
+}
+
+.shenhong {
+    font-family: "宋体";
+    font-size: 12px;
+    line-height: 22px;
+    color: #990000;
+}
+
+.lv {
+    font-family: "宋体";
+    font-size: 14px;
+    font-weight: bold;
+    color: #006600;
+}
+
+.hei {
+    font-family: "宋体";
+    font-size: 12px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.shenhong :link {
+    font-size: 12px;
+    color: #FF6600;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.shenhong :visited {
+    font-size: 12px;
+    color: #FF6600;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.shenhong :hover {
+    font-size: 12px;
+    color: #FF6600;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.shenhong :active {
+    font-size: 12px;
+    color: #FF6600;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.huanglv :link {
+    font-size: 12px;
+    color: #669900;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.huanglv :visited {
+    font-size: 12px;
+    color: #669900;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.huanglv :hover {
+    font-size: 12px;
+    color: #669900;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.huanglv :active {
+    font-size: 12px;
+    color: #669900;
+    text-decoration: none;
+    font-family: "宋体";
+    line-height: 23px;
+}
+
+.qianhuang {
+    font-family: "宋体";
+    font-size: 12px;
+    line-height: 22px;
+    color: #FFFFCC;
+}
+
+.cuhong {
+    font-family: "宋体";
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.xiaolv {
+    font-family: "宋体";
+    font-size: 12px;
+    line-height: 22px;
+    color: #006600;
+}
+
+.biaodan {
+    font-family: "宋体";
+    font-size: 12px;
+    line-height: 22px;
+    color: #CC0066;
+    background-color: #F7F7F6;
+    margin: 1px;
+    padding: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-top-color: #F7F7F6;
+    border-right-color: #F7F7F6;
+    border-bottom-color: #F7F7F6;
+    border-left-color: #F7F7F6;
+}
+* {
+margin:0px;padding:0px;
+}

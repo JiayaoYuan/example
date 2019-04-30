@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <link href="css/css.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            var uname = getQueryString('uname');
+        });
+        //获取url参数
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        //发送私信
+        function Send() {
+            var xin = $('#sx').val();
+            if (xin == '') {
+                alert('信件不能为空');
+                return;
+            }
+            var frend = getQueryString('uname');
+            var pd = { "t": "7", "FriendName": frend, "msgStr": xin };
+            $.ajax({
+                type: "post",
+                url: "tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        alert('发送成功');
+                        //关闭本窗体
+                        var close = $('#CloseCover', parent.document);
+                        $('#coverDiv', parent.document).remove();
+                        $(close).parent().parent().remove();
+                    }
+                    else {
+                        alert('登录之后才能给心仪的Ta发送信息哦！');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        function CloseBtn() {
+            //关闭本窗体
+            $(window.parent.window.document.body).css('overflow', '');
+            var close = $('#CloseCover', parent.document);
+            $('#coverDiv', parent.document).remove();
+            $(close).parent().parent().remove();
+        }
+    </script>
+    <style>
+        .quxiao {
+            width: 150px;
+            height: 40px;
+            background-image: url(img/取消.png);
+            border: none;
+        }
+        .quxiao:hover {
+        background-image: url(img/取消悬浮.png);
+        }
+        .fs {
+            margin-left:2px;
+            width: 150px;
+            height: 40px;
+            background-image: url(img/发送.png);
+            border: none;
+        }
+            .fs:hover {
+            background-image: url(img/发送悬浮.png);
+            }
+    </style>
+</head>
+<body>
+    <div style="height:40px;line-height:40px;padding-left:30px;font-size:17px;font-weight:800;background-image:url(img/tobg.png)">
+        
+    </div>
+    <div>
+        <textarea id="sx" placeholder="<填写私信信息>" style="resize:none; width:305px;height:215px;font-size:16px;border:none;"></textarea>
+    </div>
+    <div style="position:absolute;bottom:1px;">
+        <input type="button" class="fs" onclick="Send()" />
+        <input type="button" class="quxiao" onclick="CloseBtn()" />
+    </div>
+</body>
+</html>

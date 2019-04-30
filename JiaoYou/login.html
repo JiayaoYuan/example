@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="css/css.css" rel="stylesheet" />
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+        $(function () {
+            $('#txtUserName').val(getCookie('name'));
+            $('#txtPwd').val(getCookie('pwd'));
+        });
+
+        //什么是cookie，cookie为用户在浏览器中保存的信息，这些信息可以让用户
+        //不再输入重复的信息，例如登录一次，在多长时间内不必再登录。这样方便
+        //了用户，但是信息不安全。任何人都可以几乎访问。
+        //设置cookie
+        function setCookie(name, value) {
+            //有效时间为30天
+            var Days = 30;
+            var exp = new Date();
+            //计算时间和设置时间，天数为30天，每天24小时，每小时为60分钟，每分钟为60秒，每秒为1000毫秒
+            //设置cookie设置的为毫秒
+            exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+            //设置cookie
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+        }
+        //读取cookie
+        function getCookie(name) {
+            //利用正则表达式获取cookie的值。
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            //获取到的cookie的值
+            if (arr = document.cookie.match(reg))
+                return unescape(arr[2]);
+            else
+                return null;
+        }
+        function Login() {
+            var txtUserName = $('#txtUserName').val();
+            var txtPwd = $('#txtPwd').val();
+            if (txtUserName == '' || txtPwd == '') {
+                alert('用户名密码不能为空');
+                return;
+            }
+            var pd = { "t": "1", "txtUserName": txtUserName, "txtPwd": txtPwd };
+            $.ajax({
+                type: "post",
+                url: "tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        if ($('#jizhu').is(':checked')) {
+                            setCookie('name', txtUserName);
+                            setCookie('pwd', txtPwd);
+                        }
+                        else {
+                            setCookie('name', '');
+                            setCookie('pwd', '');
+                        }
+                        window.location.href = '../Login/index.html';
+                    }
+                    else {
+                        alert('用户名称或密码不正确');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
+        }
+        //获取密码
+        function GetPwd() {
+            //获取id属性为txtUserName标签的值
+            var txtUserName = $('#txtUserName').val();
+            //如果值为空，弹出提示，之后阻止方法向下运行
+            if (txtUserName == '') {
+                alert('用户名不能为空');
+                return;
+            }
+            //调用后台方法，调用的方法标识为“2”，向后台传递参数为txtUserName
+            var pd = { "t": "2", "txtUserName": txtUserName };
+            $.ajax({
+                //传递的方式为post方式，传递的地址为tools/Handler.ashx，返回的值为json的数据格式
+                type: "post",
+                url: "tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    //获取返回的值
+                    if (data.status != "-1") {
+                        //弹出提示
+                        alert("密码为：" + data.status);
+                    }
+                    else {
+                        //弹出提示
+                        alert('没有此用户名');
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //如果返回的值有错误，都会执行这里的代码，例如弹出提示等
+                }
+            });
+        }
+        function reg() {
+            window.location.href = 'Login/Login.aspx';
+        }
+        function home() {
+            window.location.href = '../Login/index.html';
+        }
+        //浏览器加载的时候所执行的方法
+        $(function () {
+            //调用js方法
+            setSize();
+            //浏览器改变大小的监听器
+            $(window).resize(function () {
+                //调用js方法
+                setSize();
+            });
+        });
+        //重新计算标签大小，浏览器改变大小的时候，让控件看
+        //起来不难看
+        function setSize() {
+            //获取浏览器高度，之后转换成数字类型
+            var h = parseFloat($(window).height());
+            //获取浏览器宽度，之后转换成数字类型
+            var w = parseFloat($(window).width());
+            //设置背景图片的大小，用jQuery设置css属性
+            $('#body').css('background-size', w + 'px ' + h + 'px');
+            //设置css属性，让标签距离浏览器顶部的距离，和左边的距离
+            $('#cc').css('top', h / 2 - 300 + "px");
+            $('#cc').css('left', w / 2 - 500 + "px");
+        }
+        function urlindex() {
+            window.location.href = "Login/index.html";
+        }
+    </script>
+</head>
+
+<!--css样式为网页的背景图片-->
+<body id="body" style="background-image:url(img/bj.jpg); ">
+    <!--这个div为绝对定位，这个div的宽度为1000px-->
+    <div id="cc" style="position:absolute; width:1000px;">
+        <!--放一张两个小人的图片-->
+        <img id="ren" src="img/ren.png" style="width:350px;" />
+        <!--放一个放文本框和按钮的div，飘向右边-->
+        <div style="float:right;">
+            <!--放一个网站的logo点击可以链接到首页-->
+            <div><img src="img/qxlogo.png" style="margin-left:200px;cursor:pointer;" onclick="urlindex()" /></div>
+            <div style="font-size:15px; line-height:30px;margin-top:60px;margin-left:110px;">
+                <!--在这个div中放了一段文字，和一个输入用户名的文本框-->
+                <font>登录账号：</font><input id="txtUserName" type="text" style="height:40px;width:250px;margin-left:6px;" />
+            </div>
+            <div style="font-size:15px; line-height:30px;margin-top:30px;margin-left:140px;">
+                <!--在这个div中放了一段文字，和一个输入密码的文本框-->
+                <font>密码：</font><input id="txtPwd" type="password" style="height:40px;width:250px;margin-left:6px;" />
+            </div>
+            <div style="font-size:15px; line-height:30px;margin-top:30px;margin-left:110px;">
+                <div style="float:left;margin-right:50px; ">
+                    <!--点击记住密码的复选框，如果选中网站将记住密码，用户可以不用再重新输入-->
+                    <input id="jizhu" type="checkbox" style="margin-left:90px;" />记住密码
+                </div>
+                <div style="float:right;margin-right:50px; ">
+                    <!--忘记密码的功能，点击可以弹出当前人员的密码-->
+                    <font style="cursor:pointer;" onclick="GetPwd()">忘记密码</font>
+                </div>
+            </div>
+            <div style="font-size:15px; line-height:30px;margin-top:30px;margin-left:40px;clear:both;">
+                <!--点击登录的功能按钮，也是一张图片，他有了onclick属性，这样可以当做一个按钮使用-->
+                <img src="img/btn-up.png" onclick="Login()" style="cursor:pointer;margin-left:210px;margin-top:40px;" />
+                <!--点击注册的功能按钮，这个标签有点击事件，所以可以当做一个按钮使用-->
+                <font style="cursor:pointer; " onclick="reg()">【注册】</font>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

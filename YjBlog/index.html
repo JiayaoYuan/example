@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/css1.css" rel="stylesheet" />
+    <script src="js/jquery.form.min.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            InitContent();
+            GetProbContent();
+        });
+
+        var lang_name = "Java";
+        var prob_type;
+        var answer_title = new Array();
+        //初始化页面数据
+        function InitContent(index) {
+            switch (arguments.length) {
+                case 0:                    
+                    ProbContent(1);
+                    break;
+                case 1:
+                    ProbContent(index + 1)
+                    break;
+            }
+        }
+
+        function ProbContent(index) {
+            var pd = { "t": "1", "lang_name": lang_name, "prob_type": $("#test li:nth-child(" + index + ")").text().toString() };
+            $.ajax({
+                type: "post",
+                url: "tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        prob_type = $("#test li:nth-child(" + index + ")").text().toString();
+                        //格式化后台传递过来的值
+                        var dataobj = eval("(" + data.status + ")");
+                        $("#article").empty();
+                        $("#article").append("<div class='article_list'></div>");
+                        $("#article .article_list").append("<h1>Problem List</h1><br>");                        
+                        $.each(dataobj.root, function (i, item) {                            
+                            answer_title[i] = item.Answer_Title;
+                            $("#article .article_list").append("<p onclick=GetContent(" + i + ")>" + item.Answer_Title + "</p>");
+                        });
+                    } else {
+                        alert("success 数据调用不成功！");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                }
+            });
+        }
+
+        //得到具体内容
+        function GetContent(index) {
+            var pd = { "t": "2", "lang_name": lang_name, "prob_type": prob_type, "answer_title": answer_title[index] };
+            
+            $.ajax({
+                type: "post",
+                url: "tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        //格式化后台传递过来的值
+                        var dataobj = eval("(" + data.status + ")");
+                        $("#article").empty();
+                        $("#article").append("<div class='article_content'></div>")
+                        $("#article .article_content").append("<h1>Problem Content</h1><br>");                        
+                        $.each(dataobj.root, function (i, item) {
+                            $("#article .article_content").append("<p>" + item.Title + "</p>")
+                            $("#article .article_content").append("<p>" + item.Article1 + "</p>")
+                            $("#article .article_content").append("<p>" + item.Article2 + "</p>")
+                            $("#article .article_content").append("<p>" + item.Article3 + "</p>")
+                        })
+                    } else {
+                        alert("success 数据调用不成功！");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.status);
+                }
+            });
+        }
+
+        //得到问题列表页面与具体内容
+        function GetProbContent() {
+            var arrayProb = new Array();     //问题类表数组
+
+            $("#test li").each(function () {
+                arrayProb[$(this).index()] = true;
+            });            
+            $("#test li").click(function () {
+                if (arrayProb[$(this).index()]) {
+                    InitContent($(this).index());
+                    $("#test li").each(function () {
+                        arrayProb[$(this).index()] = true;
+                        $("#test li").css("backgroundColor", "");
+                    });
+                    Content();
+                    $("#test li:nth-child(" + ($(this).index() + 1) + ")").css("backgroundColor", "#6af82d");
+                    arrayProb[$(this).index()] = false;
+                }
+            });            
+        }
+        
+    </script>
+</head>
+<body>
+    <div class="date"></div>
+    <div class="content">
+        <div class="nav">
+            <a class="active" href="#">Java</a>
+            <a href="#">ASP.NET</a>
+            <a href="#">JavaScript</a>
+            <a href="#">Html5</a>
+            <a href="#">Css3</a>
+        </div>
+        <div class="container">
+            <div class="aside">
+                <div class="aside_inner">
+                    <ul id="test">
+                        <li>JDBC+Servlet</li>
+                        <li>JSP</li>
+                        <li>SpringBoot</li>
+                        <li>Maven</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="article">
+
+            </div>
+        </div>
+    </div>
+    <div class=""></div>
+</body>
+</html>

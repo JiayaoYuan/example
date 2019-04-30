@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="css/common.css" rel="stylesheet" />
+    <link href="css/css1.css" rel="stylesheet" />
+    <script src="js/jquery.form.min.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <style>
+        .aside li {
+            box-sizing: border-box;
+            height: 50px;
+            font-size: 28px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid #0094ff;
+            margin: 0 20px;
+        }
+
+        .aside li:hover {
+            background-color: #0094ff;
+        }
+
+        .article_content {
+            min-height: 400px;
+            border: 1px solid #0094ff;
+        }
+
+        #article .article_content ul li{
+            text-align: center;
+        }        
+
+        #article .article_content input, #article .article_content ul li {
+            height: 30px;
+            margin-bottom: 20px;
+        }
+
+        #article .article_content ul li:last-child input {
+            width: 50%;
+            background-color: #67e4ae;
+            border: none;
+            border-radius: 10px;
+        }
+
+        #article .article_content ul li:last-child input:hover{
+            box-shadow: 3px 5px #b7c2bd;
+        }
+    </style>
+    <script>
+        var Jprobtype;
+        var isclick = false;
+
+        $(function () {            
+            GetProbType();
+        });
+
+        function GetProbType() {
+            if (!isclick) {
+                Jprobtype = "Java";
+                ProbType(Jprobtype);
+                isclick = true;
+            }
+            $("#article ul li:first-child select").change(function () {
+                Jprobtype = $("#article ul li:first-child select").val();
+                ProbType(Jprobtype);
+            })
+        }
+
+        function ProbType(jprobtype) {
+            var pd = { "t": "3", "lang_name": jprobtype };
+            $.ajax({
+                type: "post",
+                url: "tools/Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status != "-1") {
+                        //格式化后台传递过来的值
+                        var dataobj = eval("(" + data.status + ")");
+                        $.each(dataobj.root, function (i, item) {
+                            $("#article ul li:nth-child(2) select").append("<option value=" + item.Prob_Type + ">" + item.Prob_Type + "</option>");
+                        })
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            })
+        }
+
+        function SetContent() {
+            //alert($("#article li:nth-child(3) input").val());
+            var pd = {
+                "t": "4",
+                "title": $("#article li:nth-child(3) input").val(),
+                "article1": $("#article li:nth-child(4) input").val(),
+                "article2": $("#article li:nth-child(5) input").val(),
+                "article3": $("#article li:nth-child(6) input").val(),
+                "photopath1": $("#article li:nth-child(7) input").val(),
+                "photopath2": $("#article li:nth-child(8) input").val(),
+                "photopath3": $("#article li:nth-child(9) input").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "Handler.ashx",
+                data: pd,
+                dataType: "json",
+                success: function (data) {
+                    if (data.stats == "1") {
+
+                    } else {
+                        alert("写入数据格式不正确");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="aside">
+            <ul>
+                <li>Release</li>
+            </ul>
+        </div>
+        <div id="article">
+            <div class="article_content">
+                <ul>
+                    <li>Code Language:
+                        <select>
+                            <option value="Java">Java</option>
+                            <option value="ASP.NET">ASP.NET</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="Html5">Html5</option>
+                            <option value="Css3">Css3</option>
+                        </select>
+                    </li>
+                    <li>
+                        Problem Type:
+                        <select></select>
+                    </li>
+                    <li>Title:<input type="text" name="name" value=" " /></li>
+                    <li>Article1:<input type="text" name="name" value=" " /></li>
+                    <li>Article2:<input type="text" name="name" value=" " /></li>
+                    <li>Article3:<input type="text" name="name" value=" " /></li>
+                    <li>PhotoPath1:<input type="text" name="name" value=" " /></li>
+                    <li>PhotoPath2:<input type="text" name="name" value=" " /></li>
+                    <li>PhotoPath3:<input type="text" name="name" value=" " /></li>
+                    <li><input type="submit" name="name" value="提交" onclick="SetContent()"/></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
