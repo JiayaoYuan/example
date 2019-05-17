@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_articles">
+          <Key>
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="article_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="bigint" Nullable="false" />
+          <Property Name="article_title" Type="text" Nullable="false" />
+          <Property Name="article_content" Type="text" Nullable="false" />
+          <Property Name="article_views" Type="bigint" Nullable="false" />
+          <Property Name="article_comment_count" Type="bigint" Nullable="false" />
+          <Property Name="article_date" Type="datetime" Nullable="false" />
+          <Property Name="article_like_count" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_comments">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="bigint" Nullable="false" />
+          <Property Name="article_id" Type="bigint" Nullable="false" />
+          <Property Name="comment_like_count" Type="bigint" Nullable="false" />
+          <Property Name="comment_date" Type="datetime" Nullable="false" />
+          <Property Name="comment_content" Type="text" Nullable="false" />
+          <Property Name="parent_comment_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_friend_links">
+          <Key>
+            <PropertyRef Name="friend_link_id" />
+          </Key>
+          <Property Name="friend_link_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="friend_links" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="friend_link_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="friend_link_description" Type="text" Nullable="false" />
+          <Property Name="friend_link_logo" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_labels">
+          <Key>
+            <PropertyRef Name="label_id" />
+          </Key>
+          <Property Name="label_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="label_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="label_alias" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="label_description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_options">
+          <Key>
+            <PropertyRef Name="option_id" />
+          </Key>
+          <Property Name="option_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="option_name" Type="varchar" MaxLength="225" Nullable="false" />
+          <Property Name="option_values" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_set_artitle_label">
+          <Key>
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="article_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="label_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_set_artitle_sort">
+          <Key>
+            <PropertyRef Name="article_id" />
+            <PropertyRef Name="sort_id" />
+          </Key>
+          <Property Name="article_id" Type="bigint" Nullable="false" />
+          <Property Name="sort_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sorts">
+          <Key>
+            <PropertyRef Name="sort_id" />
+          </Key>
+          <Property Name="sort_id" Type="bigint" Nullable="false" />
+          <Property Name="sort_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sort_alias" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="sort_description" Type="text" Nullable="false" />
+          <Property Name="parent_sort_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_user_friends">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="bigint" Nullable="false" />
+          <Property Name="user_friends_id" Type="bigint" Nullable="false" />
+          <Property Name="user_note" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_ip" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_password" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="user_email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="user_profile_photo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="user_level" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_rights" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_registration_time" Type="datetime" Nullable="false" />
+          <Property Name="user_birthday" Type="date" />
+          <Property Name="user_age" Type="int" />
+          <Property Name="user_telephone_number" Type="int" Nullable="false" />
+          <Property Name="user_nickname" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_BlogModelStoreContainer">
+          <EntitySet Name="tb_articles" EntityType="Self.tb_articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_comments" EntityType="Self.tb_comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_friend_links" EntityType="Self.tb_friend_links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_labels" EntityType="Self.tb_labels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_options" EntityType="Self.tb_options" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_set_artitle_label" EntityType="Self.tb_set_artitle_label" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_set_artitle_sort" EntityType="Self.tb_set_artitle_sort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sorts" EntityType="Self.tb_sorts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_user_friends" EntityType="Self.tb_user_friends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_users" EntityType="Self.tb_users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_BlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_articles">
+          <Key>
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="article_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="article_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="article_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="article_views" Type="Int64" Nullable="false" />
+          <Property Name="article_comment_count" Type="Int64" Nullable="false" />
+          <Property Name="article_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="article_like_count" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_comments">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="article_id" Type="Int64" Nullable="false" />
+          <Property Name="comment_like_count" Type="Int64" Nullable="false" />
+          <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parent_comment_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_friend_links">
+          <Key>
+            <PropertyRef Name="friend_link_id" />
+          </Key>
+          <Property Name="friend_link_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="friend_links" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="friend_link_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="friend_link_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="friend_link_logo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_labels">
+          <Key>
+            <PropertyRef Name="label_id" />
+          </Key>
+          <Property Name="label_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="label_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label_alias" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_options">
+          <Key>
+            <PropertyRef Name="option_id" />
+          </Key>
+          <Property Name="option_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="option_name" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="option_values" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_set_artitle_label">
+          <Key>
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="article_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="label_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_set_artitle_sort">
+          <Key>
+            <PropertyRef Name="article_id" />
+            <PropertyRef Name="sort_id" />
+          </Key>
+          <Property Name="article_id" Type="Int64" Nullable="false" />
+          <Property Name="sort_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sorts">
+          <Key>
+            <PropertyRef Name="sort_id" />
+          </Key>
+          <Property Name="sort_id" Type="Int64" Nullable="false" />
+          <Property Name="sort_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sort_alias" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sort_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="parent_sort_id" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_user_friends">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int64" Nullable="false" />
+          <Property Name="user_friends_id" Type="Int64" Nullable="false" />
+          <Property Name="user_note" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_ip" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_profile_photo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_level" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_rights" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_registration_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="user_birthday" Type="DateTime" Precision="0" />
+          <Property Name="user_age" Type="Int32" />
+          <Property Name="user_telephone_number" Type="Int32" Nullable="false" />
+          <Property Name="user_nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_BlogEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_articles" EntityType="Self.tb_articles" />
+          <EntitySet Name="tb_comments" EntityType="Self.tb_comments" />
+          <EntitySet Name="tb_friend_links" EntityType="Self.tb_friend_links" />
+          <EntitySet Name="tb_labels" EntityType="Self.tb_labels" />
+          <EntitySet Name="tb_options" EntityType="Self.tb_options" />
+          <EntitySet Name="tb_set_artitle_label" EntityType="Self.tb_set_artitle_label" />
+          <EntitySet Name="tb_set_artitle_sort" EntityType="Self.tb_set_artitle_sort" />
+          <EntitySet Name="tb_sorts" EntityType="Self.tb_sorts" />
+          <EntitySet Name="tb_user_friends" EntityType="Self.tb_user_friends" />
+          <EntitySet Name="tb_users" EntityType="Self.tb_users" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_BlogModelStoreContainer" CdmEntityContainer="db_BlogEntities">
+          <EntitySetMapping Name="tb_articles">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_articles">
+              <MappingFragment StoreEntitySet="tb_articles">
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="article_title" ColumnName="article_title" />
+                <ScalarProperty Name="article_content" ColumnName="article_content" />
+                <ScalarProperty Name="article_views" ColumnName="article_views" />
+                <ScalarProperty Name="article_comment_count" ColumnName="article_comment_count" />
+                <ScalarProperty Name="article_date" ColumnName="article_date" />
+                <ScalarProperty Name="article_like_count" ColumnName="article_like_count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_comments">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_comments">
+              <MappingFragment StoreEntitySet="tb_comments">
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="comment_like_count" ColumnName="comment_like_count" />
+                <ScalarProperty Name="comment_date" ColumnName="comment_date" />
+                <ScalarProperty Name="comment_content" ColumnName="comment_content" />
+                <ScalarProperty Name="parent_comment_id" ColumnName="parent_comment_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_friend_links">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_friend_links">
+              <MappingFragment StoreEntitySet="tb_friend_links">
+                <ScalarProperty Name="friend_link_id" ColumnName="friend_link_id" />
+                <ScalarProperty Name="friend_links" ColumnName="friend_links" />
+                <ScalarProperty Name="friend_link_name" ColumnName="friend_link_name" />
+                <ScalarProperty Name="friend_link_description" ColumnName="friend_link_description" />
+                <ScalarProperty Name="friend_link_logo" ColumnName="friend_link_logo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_labels">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_labels">
+              <MappingFragment StoreEntitySet="tb_labels">
+                <ScalarProperty Name="label_id" ColumnName="label_id" />
+                <ScalarProperty Name="label_name" ColumnName="label_name" />
+                <ScalarProperty Name="label_alias" ColumnName="label_alias" />
+                <ScalarProperty Name="label_description" ColumnName="label_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_options">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_options">
+              <MappingFragment StoreEntitySet="tb_options">
+                <ScalarProperty Name="option_id" ColumnName="option_id" />
+                <ScalarProperty Name="option_name" ColumnName="option_name" />
+                <ScalarProperty Name="option_values" ColumnName="option_values" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_set_artitle_label">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_set_artitle_label">
+              <MappingFragment StoreEntitySet="tb_set_artitle_label">
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="label_id" ColumnName="label_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_set_artitle_sort">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_set_artitle_sort">
+              <MappingFragment StoreEntitySet="tb_set_artitle_sort">
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="sort_id" ColumnName="sort_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sorts">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_sorts">
+              <MappingFragment StoreEntitySet="tb_sorts">
+                <ScalarProperty Name="sort_id" ColumnName="sort_id" />
+                <ScalarProperty Name="sort_name" ColumnName="sort_name" />
+                <ScalarProperty Name="sort_alias" ColumnName="sort_alias" />
+                <ScalarProperty Name="sort_description" ColumnName="sort_description" />
+                <ScalarProperty Name="parent_sort_id" ColumnName="parent_sort_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_user_friends">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_user_friends">
+              <MappingFragment StoreEntitySet="tb_user_friends">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_friends_id" ColumnName="user_friends_id" />
+                <ScalarProperty Name="user_note" ColumnName="user_note" />
+                <ScalarProperty Name="user_status" ColumnName="user_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_users">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_users">
+              <MappingFragment StoreEntitySet="tb_users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_ip" ColumnName="user_ip" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+                <ScalarProperty Name="user_email" ColumnName="user_email" />
+                <ScalarProperty Name="user_profile_photo" ColumnName="user_profile_photo" />
+                <ScalarProperty Name="user_level" ColumnName="user_level" />
+                <ScalarProperty Name="user_rights" ColumnName="user_rights" />
+                <ScalarProperty Name="user_registration_time" ColumnName="user_registration_time" />
+                <ScalarProperty Name="user_birthday" ColumnName="user_birthday" />
+                <ScalarProperty Name="user_age" ColumnName="user_age" />
+                <ScalarProperty Name="user_telephone_number" ColumnName="user_telephone_number" />
+                <ScalarProperty Name="user_nickname" ColumnName="user_nickname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
