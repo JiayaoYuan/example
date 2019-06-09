@@ -1,0 +1,50 @@
+﻿@model Blog.Models.tb_sorts
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_sorts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sort_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sort_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sort_alias)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sort_alias)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sort_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sort_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parent_sort_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parent_sort_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.sort_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

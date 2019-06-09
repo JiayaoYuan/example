@@ -8,6 +8,8 @@
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="article_title" ColumnName="article_title" />
           <ScalarProperty Name="article_content" ColumnName="article_content" />
+          <ScalarProperty Name="article_description" ColumnName="article_description" />
+          <ScalarProperty Name="article_label_img" ColumnName="article_label_img" />
           <ScalarProperty Name="article_views" ColumnName="article_views" />
           <ScalarProperty Name="article_comment_count" ColumnName="article_comment_count" />
           <ScalarProperty Name="article_date" ColumnName="article_date" />
@@ -49,26 +51,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_options">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_options">
-        <MappingFragment StoreEntitySet="tb_options">
-          <ScalarProperty Name="option_id" ColumnName="option_id" />
-          <ScalarProperty Name="option_name" ColumnName="option_name" />
-          <ScalarProperty Name="option_values" ColumnName="option_values" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tb_set_artitle_label">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_set_artitle_label">
-        <MappingFragment StoreEntitySet="tb_set_artitle_label">
+    <EntitySetMapping Name="tb_set_article_label">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_label">
+        <MappingFragment StoreEntitySet="tb_set_article_label">
+          <ScalarProperty Name="set_article_label_id" ColumnName="set_article_label_id" />
           <ScalarProperty Name="article_id" ColumnName="article_id" />
           <ScalarProperty Name="label_id" ColumnName="label_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_set_artitle_sort">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_set_artitle_sort">
-        <MappingFragment StoreEntitySet="tb_set_artitle_sort">
+    <EntitySetMapping Name="tb_set_article_sort">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_sort">
+        <MappingFragment StoreEntitySet="tb_set_article_sort">
+          <ScalarProperty Name="set_article_sort_id" ColumnName="set_article_sort_id" />
           <ScalarProperty Name="article_id" ColumnName="article_id" />
           <ScalarProperty Name="sort_id" ColumnName="sort_id" />
         </MappingFragment>
@@ -82,17 +77,6 @@
           <ScalarProperty Name="sort_alias" ColumnName="sort_alias" />
           <ScalarProperty Name="sort_description" ColumnName="sort_description" />
           <ScalarProperty Name="parent_sort_id" ColumnName="parent_sort_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tb_user_friends">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_user_friends">
-        <MappingFragment StoreEntitySet="tb_user_friends">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="user_friends_id" ColumnName="user_friends_id" />
-          <ScalarProperty Name="user_note" ColumnName="user_note" />
-          <ScalarProperty Name="user_status" ColumnName="user_status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

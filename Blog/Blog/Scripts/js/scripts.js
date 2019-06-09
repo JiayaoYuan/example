@@ -124,17 +124,17 @@ jQuery.ias({
 	item: '.excerpt',
 	pagination: '.pagination',
 	next: '.next-page a',
-	trigger: '查看更多',
+	trigger: '没有更多了',
 	loader: '<div class="pagination-loading"><img src="../Content/images/loading.gif" /></div>',
-	triggerPageThreshold: 2,
-	onRenderComplete: function() {
-		$('.excerpt .thumb').lazyload({
-			placeholder: '../Content/images/occupying.png',
-			threshold: 400
-		});
-		$('.excerpt img').attr('draggable','false');
-		$('.excerpt a').attr('draggable','false');
-	}
+    triggerPageThreshold: 4,
+    onRenderComplete: function () {
+        $('.excerpt .thumb').lazyload({
+            placeholder: '/Content/images/occupying.png',
+            threshold: 400
+        });
+        $('.excerpt img').attr('draggable', 'false');
+        $('.excerpt a').attr('draggable', 'false');
+    }
 });
  
 //鼠标滚动超出侧边栏高度绝对定位

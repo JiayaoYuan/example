@@ -120,7 +120,7 @@
 		noneleft: !1,
 		loader: '<img src="images/loader.gif"/>',
 		loaderDelay: 600,
-		triggerPageThreshold: 3,
+		triggerPageThreshold: 5,
 		trigger: "Load more items",
 		thresholdMargin: 0,
 		history: !0,

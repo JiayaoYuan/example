@@ -1,0 +1,66 @@
+﻿@model Blog.Models.tb_comments
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_comments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.article_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment_like_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment_like_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parent_comment_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parent_comment_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_users.user_ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_users.user_ip)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.comment_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

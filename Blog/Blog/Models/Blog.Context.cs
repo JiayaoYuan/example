@@ -29,11 +29,9 @@ namespace Blog.Models
         public virtual DbSet<tb_comments> tb_comments { get; set; }
         public virtual DbSet<tb_friend_links> tb_friend_links { get; set; }
         public virtual DbSet<tb_labels> tb_labels { get; set; }
-        public virtual DbSet<tb_options> tb_options { get; set; }
-        public virtual DbSet<tb_set_artitle_label> tb_set_artitle_label { get; set; }
-        public virtual DbSet<tb_set_artitle_sort> tb_set_artitle_sort { get; set; }
+        public virtual DbSet<tb_set_article_label> tb_set_article_label { get; set; }
+        public virtual DbSet<tb_set_article_sort> tb_set_article_sort { get; set; }
         public virtual DbSet<tb_sorts> tb_sorts { get; set; }
-        public virtual DbSet<tb_user_friends> tb_user_friends { get; set; }
         public virtual DbSet<tb_users> tb_users { get; set; }
     }
 }

@@ -13,6 +13,8 @@
           <Property Name="user_id" Type="bigint" Nullable="false" />
           <Property Name="article_title" Type="text" Nullable="false" />
           <Property Name="article_content" Type="text" Nullable="false" />
+          <Property Name="article_description" Type="text" Nullable="false" />
+          <Property Name="article_label_img" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="article_views" Type="bigint" Nullable="false" />
           <Property Name="article_comment_count" Type="bigint" Nullable="false" />
           <Property Name="article_date" Type="datetime" Nullable="false" />
@@ -45,30 +47,23 @@
             <PropertyRef Name="label_id" />
           </Key>
           <Property Name="label_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="label_name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="label_alias" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="label_description" Type="text" Nullable="false" />
+          <Property Name="label_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="label_alias" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="label_description" Type="text" />
         </EntityType>
-        <EntityType Name="tb_options">
+        <EntityType Name="tb_set_article_label">
           <Key>
-            <PropertyRef Name="option_id" />
+            <PropertyRef Name="set_article_label_id" />
           </Key>
-          <Property Name="option_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="option_name" Type="varchar" MaxLength="225" Nullable="false" />
-          <Property Name="option_values" Type="text" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_set_artitle_label">
-          <Key>
-            <PropertyRef Name="article_id" />
-          </Key>
-          <Property Name="article_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="set_article_label_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="article_id" Type="bigint" Nullable="false" />
           <Property Name="label_id" Type="bigint" Nullable="false" />
         </EntityType>
-        <EntityType Name="tb_set_artitle_sort">
+        <EntityType Name="tb_set_article_sort">
           <Key>
-            <PropertyRef Name="article_id" />
-            <PropertyRef Name="sort_id" />
+            <PropertyRef Name="set_article_sort_id" />
           </Key>
+          <Property Name="set_article_sort_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="article_id" Type="bigint" Nullable="false" />
           <Property Name="sort_id" Type="bigint" Nullable="false" />
         </EntityType>
@@ -76,21 +71,11 @@
           <Key>
             <PropertyRef Name="sort_id" />
           </Key>
-          <Property Name="sort_id" Type="bigint" Nullable="false" />
+          <Property Name="sort_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sort_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="sort_alias" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="sort_description" Type="text" Nullable="false" />
-          <Property Name="parent_sort_id" Type="bigint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_user_friends">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user_id" Type="bigint" Nullable="false" />
-          <Property Name="user_friends_id" Type="bigint" Nullable="false" />
-          <Property Name="user_note" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="user_status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sort_description" Type="text" />
+          <Property Name="parent_sort_id" Type="bigint" />
         </EntityType>
         <EntityType Name="tb_users">
           <Key>
@@ -107,20 +92,69 @@
           <Property Name="user_registration_time" Type="datetime" Nullable="false" />
           <Property Name="user_birthday" Type="date" />
           <Property Name="user_age" Type="int" />
-          <Property Name="user_telephone_number" Type="int" Nullable="false" />
+          <Property Name="user_telephone_number" Type="bigint" Nullable="false" />
           <Property Name="user_nickname" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <Association Name="FK__tb_articl__user___04CFADEC">
+          <End Role="tb_users" Type="Self.tb_users" Multiplicity="1" />
+          <End Role="tb_articles" Type="Self.tb_articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tb_articles">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_commen__artic__0A888742">
+          <End Role="tb_articles" Type="Self.tb_articles" Multiplicity="1" />
+          <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_articles">
+              <PropertyRef Name="article_id" />
+            </Principal>
+            <Dependent Role="tb_comments">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_commen__user___09946309">
+          <End Role="tb_users" Type="Self.tb_users" Multiplicity="1" />
+          <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tb_comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--生成过程中发现错误:
+警告 6035: 关系“FK__tb_labels__label__536D5C82”在关系主端上有一些列不属于表的键的一部分。已排除了此关系。
+        <Association Name="FK__tb_labels__label__536D5C82" />-->
         <EntityContainer Name="db_BlogModelStoreContainer">
           <EntitySet Name="tb_articles" EntityType="Self.tb_articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_comments" EntityType="Self.tb_comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_friend_links" EntityType="Self.tb_friend_links" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_labels" EntityType="Self.tb_labels" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_options" EntityType="Self.tb_options" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_set_artitle_label" EntityType="Self.tb_set_artitle_label" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_set_artitle_sort" EntityType="Self.tb_set_artitle_sort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_set_article_label" EntityType="Self.tb_set_article_label" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_set_article_sort" EntityType="Self.tb_set_article_sort" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sorts" EntityType="Self.tb_sorts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_user_friends" EntityType="Self.tb_user_friends" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_users" EntityType="Self.tb_users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_articl__user___04CFADEC" Association="Self.FK__tb_articl__user___04CFADEC">
+            <End Role="tb_users" EntitySet="tb_users" />
+            <End Role="tb_articles" EntitySet="tb_articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_commen__artic__0A888742" Association="Self.FK__tb_commen__artic__0A888742">
+            <End Role="tb_articles" EntitySet="tb_articles" />
+            <End Role="tb_comments" EntitySet="tb_comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_commen__user___09946309" Association="Self.FK__tb_commen__user___09946309">
+            <End Role="tb_users" EntitySet="tb_users" />
+            <End Role="tb_comments" EntitySet="tb_comments" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -135,10 +169,14 @@
           <Property Name="user_id" Type="Int64" Nullable="false" />
           <Property Name="article_title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="article_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="article_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="article_label_img" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="article_views" Type="Int64" Nullable="false" />
           <Property Name="article_comment_count" Type="Int64" Nullable="false" />
           <Property Name="article_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="article_like_count" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="tb_users" Relationship="Self.FK__tb_articl__user___04CFADEC" FromRole="tb_articles" ToRole="tb_users" />
+          <NavigationProperty Name="tb_comments" Relationship="Self.FK__tb_commen__artic__0A888742" FromRole="tb_articles" ToRole="tb_comments" />
         </EntityType>
         <EntityType Name="tb_comments">
           <Key>
@@ -151,6 +189,8 @@
           <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="parent_comment_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="tb_articles" Relationship="Self.FK__tb_commen__artic__0A888742" FromRole="tb_comments" ToRole="tb_articles" />
+          <NavigationProperty Name="tb_users" Relationship="Self.FK__tb_commen__user___09946309" FromRole="tb_comments" ToRole="tb_users" />
         </EntityType>
         <EntityType Name="tb_friend_links">
           <Key>
@@ -167,30 +207,23 @@
             <PropertyRef Name="label_id" />
           </Key>
           <Property Name="label_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="label_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="label_alias" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="label_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label_alias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tb_options">
+        <EntityType Name="tb_set_article_label">
           <Key>
-            <PropertyRef Name="option_id" />
+            <PropertyRef Name="set_article_label_id" />
           </Key>
-          <Property Name="option_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="option_name" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="option_values" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_set_artitle_label">
-          <Key>
-            <PropertyRef Name="article_id" />
-          </Key>
-          <Property Name="article_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="set_article_label_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="article_id" Type="Int64" Nullable="false" />
           <Property Name="label_id" Type="Int64" Nullable="false" />
         </EntityType>
-        <EntityType Name="tb_set_artitle_sort">
+        <EntityType Name="tb_set_article_sort">
           <Key>
-            <PropertyRef Name="article_id" />
-            <PropertyRef Name="sort_id" />
+            <PropertyRef Name="set_article_sort_id" />
           </Key>
+          <Property Name="set_article_sort_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="article_id" Type="Int64" Nullable="false" />
           <Property Name="sort_id" Type="Int64" Nullable="false" />
         </EntityType>
@@ -198,21 +231,11 @@
           <Key>
             <PropertyRef Name="sort_id" />
           </Key>
-          <Property Name="sort_id" Type="Int64" Nullable="false" />
+          <Property Name="sort_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sort_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sort_alias" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="sort_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="parent_sort_id" Type="Int64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_user_friends">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user_id" Type="Int64" Nullable="false" />
-          <Property Name="user_friends_id" Type="Int64" Nullable="false" />
-          <Property Name="user_note" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="user_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sort_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="parent_sort_id" Type="Int64" />
         </EntityType>
         <EntityType Name="tb_users">
           <Key>
@@ -229,20 +252,68 @@
           <Property Name="user_registration_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="user_birthday" Type="DateTime" Precision="0" />
           <Property Name="user_age" Type="Int32" />
-          <Property Name="user_telephone_number" Type="Int32" Nullable="false" />
+          <Property Name="user_telephone_number" Type="Int64" Nullable="false" />
           <Property Name="user_nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_articles" Relationship="Self.FK__tb_articl__user___04CFADEC" FromRole="tb_users" ToRole="tb_articles" />
+          <NavigationProperty Name="tb_comments" Relationship="Self.FK__tb_commen__user___09946309" FromRole="tb_users" ToRole="tb_comments" />
         </EntityType>
+        <Association Name="FK__tb_articl__user___04CFADEC">
+          <End Role="tb_users" Type="Self.tb_users" Multiplicity="1" />
+          <End Role="tb_articles" Type="Self.tb_articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tb_articles">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_commen__artic__0A888742">
+          <End Role="tb_articles" Type="Self.tb_articles" Multiplicity="1" />
+          <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_articles">
+              <PropertyRef Name="article_id" />
+            </Principal>
+            <Dependent Role="tb_comments">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tb_commen__user___09946309">
+          <End Role="tb_users" Type="Self.tb_users" Multiplicity="1" />
+          <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="tb_comments">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="db_BlogEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_articles" EntityType="Self.tb_articles" />
           <EntitySet Name="tb_comments" EntityType="Self.tb_comments" />
           <EntitySet Name="tb_friend_links" EntityType="Self.tb_friend_links" />
           <EntitySet Name="tb_labels" EntityType="Self.tb_labels" />
-          <EntitySet Name="tb_options" EntityType="Self.tb_options" />
-          <EntitySet Name="tb_set_artitle_label" EntityType="Self.tb_set_artitle_label" />
-          <EntitySet Name="tb_set_artitle_sort" EntityType="Self.tb_set_artitle_sort" />
+          <EntitySet Name="tb_set_article_label" EntityType="Self.tb_set_article_label" />
+          <EntitySet Name="tb_set_article_sort" EntityType="Self.tb_set_article_sort" />
           <EntitySet Name="tb_sorts" EntityType="Self.tb_sorts" />
-          <EntitySet Name="tb_user_friends" EntityType="Self.tb_user_friends" />
           <EntitySet Name="tb_users" EntityType="Self.tb_users" />
+          <AssociationSet Name="FK__tb_articl__user___04CFADEC" Association="Self.FK__tb_articl__user___04CFADEC">
+            <End Role="tb_users" EntitySet="tb_users" />
+            <End Role="tb_articles" EntitySet="tb_articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_commen__artic__0A888742" Association="Self.FK__tb_commen__artic__0A888742">
+            <End Role="tb_articles" EntitySet="tb_articles" />
+            <End Role="tb_comments" EntitySet="tb_comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tb_commen__user___09946309" Association="Self.FK__tb_commen__user___09946309">
+            <End Role="tb_users" EntitySet="tb_users" />
+            <End Role="tb_comments" EntitySet="tb_comments" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -257,6 +328,8 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="article_title" ColumnName="article_title" />
                 <ScalarProperty Name="article_content" ColumnName="article_content" />
+                <ScalarProperty Name="article_description" ColumnName="article_description" />
+                <ScalarProperty Name="article_label_img" ColumnName="article_label_img" />
                 <ScalarProperty Name="article_views" ColumnName="article_views" />
                 <ScalarProperty Name="article_comment_count" ColumnName="article_comment_count" />
                 <ScalarProperty Name="article_date" ColumnName="article_date" />
@@ -298,26 +371,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_options">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_options">
-              <MappingFragment StoreEntitySet="tb_options">
-                <ScalarProperty Name="option_id" ColumnName="option_id" />
-                <ScalarProperty Name="option_name" ColumnName="option_name" />
-                <ScalarProperty Name="option_values" ColumnName="option_values" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_set_artitle_label">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_set_artitle_label">
-              <MappingFragment StoreEntitySet="tb_set_artitle_label">
+          <EntitySetMapping Name="tb_set_article_label">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_label">
+              <MappingFragment StoreEntitySet="tb_set_article_label">
+                <ScalarProperty Name="set_article_label_id" ColumnName="set_article_label_id" />
                 <ScalarProperty Name="article_id" ColumnName="article_id" />
                 <ScalarProperty Name="label_id" ColumnName="label_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_set_artitle_sort">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_set_artitle_sort">
-              <MappingFragment StoreEntitySet="tb_set_artitle_sort">
+          <EntitySetMapping Name="tb_set_article_sort">
+            <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_sort">
+              <MappingFragment StoreEntitySet="tb_set_article_sort">
+                <ScalarProperty Name="set_article_sort_id" ColumnName="set_article_sort_id" />
                 <ScalarProperty Name="article_id" ColumnName="article_id" />
                 <ScalarProperty Name="sort_id" ColumnName="sort_id" />
               </MappingFragment>
@@ -331,17 +397,6 @@
                 <ScalarProperty Name="sort_alias" ColumnName="sort_alias" />
                 <ScalarProperty Name="sort_description" ColumnName="sort_description" />
                 <ScalarProperty Name="parent_sort_id" ColumnName="parent_sort_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_user_friends">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_user_friends">
-              <MappingFragment StoreEntitySet="tb_user_friends">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="user_friends_id" ColumnName="user_friends_id" />
-                <ScalarProperty Name="user_note" ColumnName="user_note" />
-                <ScalarProperty Name="user_status" ColumnName="user_status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

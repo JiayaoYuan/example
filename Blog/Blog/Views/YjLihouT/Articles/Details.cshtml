@@ -1,0 +1,74 @@
+﻿@model Blog.Models.tb_articles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tb_articles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_views)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_views)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_comment_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_comment_count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.article_like_count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.article_like_count)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.article_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -21,5 +21,8 @@ namespace Blog.Models
         public System.DateTime comment_date { get; set; }
         public string comment_content { get; set; }
         public long parent_comment_id { get; set; }
+    
+        public virtual tb_articles tb_articles { get; set; }
+        public virtual tb_users tb_users { get; set; }
     }
 }

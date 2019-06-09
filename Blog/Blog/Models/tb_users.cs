@@ -14,6 +14,13 @@ namespace Blog.Models
     
     public partial class tb_users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_users()
+        {
+            this.tb_articles = new HashSet<tb_articles>();
+            this.tb_comments = new HashSet<tb_comments>();
+        }
+    
         public long user_id { get; set; }
         public string user_ip { get; set; }
         public string user_name { get; set; }
@@ -25,7 +32,12 @@ namespace Blog.Models
         public System.DateTime user_registration_time { get; set; }
         public Nullable<System.DateTime> user_birthday { get; set; }
         public Nullable<int> user_age { get; set; }
-        public int user_telephone_number { get; set; }
+        public long user_telephone_number { get; set; }
         public string user_nickname { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_articles> tb_articles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_comments> tb_comments { get; set; }
     }
 }

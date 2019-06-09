@@ -81,15 +81,16 @@
         <p><img data-original="images/banner/banner_03.jpg" src="images/banner/banner_03.jpg" alt="" /></p>
         <p> 用php获取上个月最后一天的时间，有两种方法，都非常简单，详细实现源码如下： </p>
         <pre class="prettyprint lang-php">&lt;?php
-  date_default_timezone_set("PRC"); //设置时区
-  //方法一
-  $times = date("d") * 24 * 3600;
-  echo date("Y-m-d H:i:s", time()-$times);
-  echo '&lt;br/&gt;';
-  //方法二
-  $day = date('d');
-  echo date("Y-m-d H:i:s", strtotime(-$day.' day'));
-?&gt;</pre>
+            date_default_timezone_set("PRC"); //设置时区
+            //方法一
+            $times = date("d") * 24 * 3600;
+            echo date("Y-m-d H:i:s", time()-$times);
+            echo '&lt;br/&gt;';
+            //方法二
+            $day = date('d');
+            echo date("Y-m-d H:i:s", strtotime(-$day.' day'));
+          ?&gt;
+        </pre>
         <p> 方法一是利用当前时间离本月初有多少时间，然后用当前时间减去这个时间差，就可以得到上月最后一天了。 </p>
         <p> 方法二是先计算本月多少号，即离月初有多少天，然后用strtotime计算出$day天前的时间戳，也可以得到上个月的最后一天。 </p>
         <p class="article-copyright hidden-xs">未经允许不得转载：<a href="">异清轩博客</a> » <a href="article.html">php如何判断一个日期的格式是否正确</a></p>

@@ -38,13 +38,13 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="">消息 <span class="badge">1</span></a></li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">admin <span class="caret"></span></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                                 <ul class="dropdown-menu dropdown-menu-left">
                                     <li><a title="查看或修改个人信息" data-toggle="modal" data-target="#seeUserInfo">个人信息</a></li>
                                     <li><a title="查看您的登录记录" data-toggle="modal" data-target="#seeUserLoginlog">登录记录</a></li>
                                 </ul>
                             </li>
-                            <li><a href="login.html" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
+                            <li><a href="~/Login/Index" onClick="if(!confirm('是否确认退出？'))return false;">退出登录</a></li>
                             <li><a data-toggle="modal" data-target="#WeChat">帮助</a></li>
                         </ul>
                         <form action="" method="post" class="navbar-form navbar-right" role="search">
@@ -59,7 +59,52 @@
                 </div>
             </nav>
         </header>
-        @RenderBody()
+        <div class="row">
+            <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="/YjLihouT/Main/Index">报告</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="../Articles/Article">文章</a></li>
+                    <li><a href="/YjLihouT/Notice">公告</a></li>
+                    <li><a href="/YjLihouT/Comment">评论</a></li>
+                    <li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="../Category/Index">栏目</a></li>
+                    <li>
+                        <a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其他</a>
+                        <ul class="dropdown-menu" aria-labelledby="otherMenu">
+                            <li><a href="/YjLihouT/Flink">友情链接</a></li>
+                            <li><a data-toggle="modal" data-target="#areDeveloping">访问记录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a class="dropdown-toggle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">用户</a>
+                        <ul class="dropdown-menu" aria-labelledby="userMenu">
+                            <li><a data-toggle="modal" data-target="#areDeveloping">管理用户组</a></li>
+                            <li><a href="/YjLihouT/Manage-user">管理用户</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/YjLihouT/Loginlog">管理登录日志</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-toggle" id="settingMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">设置</a>
+                        <ul class="dropdown-menu" aria-labelledby="settingMenu">
+                            <li><a href="/YjLihouT/Setting">基本设置</a></li>
+                            <li><a href="/YjLihouT/Readset">阅读设置</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a data-toggle="modal" data-target="#areDeveloping">安全配置</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="disabled"><a>扩展菜单</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+            @RenderBody()
+        </div>        
     </section>
     <!--个人信息模态框-->
     <div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -78,15 +123,15 @@
                             <tbody>
                                 <tr>
                                     <td wdith="20%">姓名:</td>
-                                    <td width="80%"><input type="text" value="王雨" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
+                                    <td width="80%"><input type="text" class="form-control" name="truename" maxlength="10" autocomplete="off" /></td>
                                 </tr>
                                 <tr>
                                     <td wdith="20%">用户名:</td>
-                                    <td width="80%"><input type="text" value="admin" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
+                                    <td width="80%"><input type="text" class="form-control" name="username" maxlength="10" autocomplete="off" /></td>
                                 </tr>
                                 <tr>
                                     <td wdith="20%">电话:</td>
-                                    <td width="80%"><input type="text" value="18538078281" class="form-control" name="usertel" maxlength="13" autocomplete="off" /></td>
+                                    <td width="80%"><input type="text" class="form-control" name="usertel" maxlength="13" autocomplete="off" /></td>
                                 </tr>
                                 <tr>
                                     <td wdith="20%">旧密码:</td>
@@ -169,7 +214,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="WeChatModalLabel" style="cursor:default;">微信扫一扫</h4>
                 </div>
-                <div class="modal-body" style="text-align:center"> <img src="images/weixin.jpg" alt="" style="cursor:pointer" /> </div>
+                <div class="modal-body" style="text-align:center"> <img src="~/Content/images/weixin.jpg" alt="" style="cursor:pointer" /> </div>
             </div>
         </div>
     </div>
@@ -182,7 +227,7 @@
                     <h4 class="modal-title" id="areDevelopingModalLabel" style="cursor:default;">该功能正在日以继夜的开发中…</h4>
                 </div>
                 <div class="modal-body">
-                    <img src="images/baoman/baoman_01.gif" alt="深思熟虑" />
+                    <img src="~/Content/images/baoman/baoman_01.gif" alt="深思熟虑" />
                     <p style="padding:15px 15px 15px 100px; position:absolute; top:15px; cursor:default;">很抱歉，程序猿正在日以继夜的开发此功能，本程序将会在以后的版本中持续完善！</p>
                 </div>
                 <div class="modal-footer">
@@ -203,5 +248,6 @@
     </div>
     <script src="~/Scripts/js/bootstrap.min.js"></script>
     <script src="~/Scripts/js/admin-scripts.js"></script>
+    <script src="~/Scripts/js/manareq.js"></script>
 </body>
 </html>

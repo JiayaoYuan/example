@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Blog.App_Start;
 
 namespace Blog
 {
@@ -16,6 +17,14 @@ namespace Blog
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            RegisterView(); //注册视图访问规则
+        }
+
+        protected void RegisterView()
+        {
+            ViewEngines.Engines.Clear();
+            
+            ViewEngines.Engines.Add(new MyViewEngine());
         }
     }
 }

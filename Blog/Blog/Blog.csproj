@@ -126,10 +126,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\CommanFile.cs" />
+    <Compile Include="App_Start\f.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MyViewEngine.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\YjLihouTController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,13 +167,10 @@
     <Compile Include="Models\tb_labels.cs">
       <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_options.cs">
+    <Compile Include="Models\tb_set_article_label.cs">
       <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_set_artitle_label.cs">
-      <DependentUpon>Blog.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tb_set_artitle_sort.cs">
+    <Compile Include="Models\tb_set_article_sort.cs">
       <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_sorts.cs">
@@ -175,12 +179,13 @@
     <Compile Include="Models\tb_users.cs">
       <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tb_user_friends.cs">
-      <DependentUpon>Blog.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tools\Handler.ashx.cs">
+      <DependentUpon>Handler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="articles\HtmlPage1.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -477,6 +482,16 @@
     <Content Include="Content\lib\summernote\summernote.css" />
     <Content Include="Content\lib\summernote\summernote.js" />
     <Content Include="Content\lib\summernote\summernote.min.js" />
+    <Content Include="Content\lib\ueditor\asp\action_config.asp" />
+    <Content Include="Content\lib\ueditor\asp\action_crawler.asp" />
+    <Content Include="Content\lib\ueditor\asp\action_list.asp" />
+    <Content Include="Content\lib\ueditor\asp\action_upload.asp" />
+    <Content Include="Content\lib\ueditor\asp\ASPJson.class.asp" />
+    <Content Include="Content\lib\ueditor\asp\config_loader.asp" />
+    <Content Include="Content\lib\ueditor\asp\controller.asp" />
+    <Content Include="Content\lib\ueditor\asp\MultiformProcessor.class.asp" />
+    <Content Include="Content\lib\ueditor\asp\PathFormatter.class.asp" />
+    <Content Include="Content\lib\ueditor\asp\Uploader.Class.asp" />
     <Content Include="Content\lib\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\lib\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\lib\ueditor\dialogs\attachment\attachment.html" />
@@ -639,11 +654,6 @@
     <Content Include="Content\lib\ueditor\lang\zh-cn\images\music.png" />
     <Content Include="Content\lib\ueditor\lang\zh-cn\images\upload.png" />
     <Content Include="Content\lib\ueditor\lang\zh-cn\zh-cn.js" />
-    <Content Include="Content\lib\ueditor\php\action_crawler.php" />
-    <Content Include="Content\lib\ueditor\php\action_list.php" />
-    <Content Include="Content\lib\ueditor\php\action_upload.php" />
-    <Content Include="Content\lib\ueditor\php\controller.php" />
-    <Content Include="Content\lib\ueditor\php\Uploader.class.php" />
     <Content Include="Content\lib\ueditor\themes\default\css\ueditor.css" />
     <Content Include="Content\lib\ueditor\themes\default\css\ueditor.min.css" />
     <Content Include="Content\lib\ueditor\themes\default\dialogbase.css" />
@@ -740,6 +750,7 @@
     <Content Include="Content\lib\ueditor\third-party\webuploader\webuploader.min.js" />
     <Content Include="Content\lib\ueditor\third-party\webuploader\webuploader.withoutimage.js" />
     <Content Include="Content\lib\ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="Content\lib\ueditor\third-party\xss.min.js" />
     <Content Include="Content\lib\ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
     <Content Include="Content\lib\ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
     <Content Include="Content\lib\ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
@@ -777,7 +788,8 @@
     <Content Include="Content\fonts\TaurusNormal.woff" />
     <Content Include="Content\images\icon\favicon.psd" />
     <Content Include="Content\images\icon\icon.psd" />
-    <Content Include="Content\lib\ueditor\php\config.json" />
+    <Content Include="Content\lib\ueditor\asp\config.json" />
+    <Content Include="Content\lib\ueditor\asp\README.md" />
     <Content Include="Content\lib\ueditor\third-party\jquery-1.10.2.min.map" />
     <Content Include="Content\lib\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Content\lib\ueditor\third-party\video-js\font\vjs.ttf" />
@@ -801,6 +813,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\admin-scripts.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\homepage.js" />
     <Content Include="Scripts\js\html5shiv.min.js" />
     <Content Include="Scripts\js\jquery-1.11.1.min.js" />
     <Content Include="Scripts\js\jquery-2.1.4.min.js" />
@@ -809,12 +822,14 @@
     <Content Include="Scripts\js\jquery.qqFace.js" />
     <Content Include="Scripts\js\jquery.snow.js" />
     <Content Include="Scripts\js\jsized.snow.js" />
+    <Content Include="Scripts\js\manareq.js" />
     <Content Include="Scripts\js\nprogress.js" />
     <Content Include="Scripts\js\respond.min.js" />
     <Content Include="Scripts\js\scripts.js" />
     <Content Include="Scripts\js\selectivizr-min.js" />
     <Content Include="Scripts\js\snow.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -831,20 +846,38 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Readers.cshtml" />
     <Content Include="Views\Home\Tags.cshtml" />
-    <Content Include="Views\YjLihouT\Index.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Index.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\YjLihouT\Article.cshtml" />
-    <Content Include="Views\YjLihouT\Notice.cshtml" />
-    <Content Include="Views\YjLihouT\Readset.cshtml" />
-    <Content Include="Views\YjLihouT\Setting.cshtml" />
-    <Content Include="Views\YjLihouT\Loginlog.cshtml" />
-    <Content Include="Views\YjLihouT\ManageUser.cshtml" />
-    <Content Include="Views\YjLihouT\Flink.cshtml" />
-    <Content Include="Views\YjLihouT\Category.cshtml" />
-    <Content Include="Views\YjLihouT\Comment.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Notice.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Readset.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Setting.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Loginlog.cshtml" />
+    <Content Include="Views\YjLihouT\Main\ManageUser.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Flink.cshtml" />
+    <Content Include="Views\YjLihouT\Main\Comment.cshtml" />
+    <Content Include="Views\YjLihouT\Articles\Add.cshtml" />
+    <Content Include="Views\YjLihouT\Articles\Delete.cshtml" />
+    <Content Include="Views\YjLihouT\Articles\Details.cshtml" />
+    <Content Include="Views\YjLihouT\Articles\UpdateArticle.cshtml" />
+    <Content Include="Views\YjLihouT\Articles\Article.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="tools\Handler.ashx" />
+    <Content Include="Views\YjLihouT\Category\Create.cshtml" />
+    <Content Include="Views\YjLihouT\Category\Delete.cshtml" />
+    <Content Include="Views\YjLihouT\Category\Details.cshtml" />
+    <Content Include="Views\YjLihouT\Category\Edit.cshtml" />
+    <Content Include="Views\YjLihouT\Category\Index.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Handler.ashx" />
+    <Content Include="Views\Home\article.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\lib\ueditor\asp\upload\image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -888,6 +921,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties content_4lib_4ueditor_4asp_4config_1json__JsonSchema="http://json.schemastore.org/2.0.0-csd.2.beta.2018-10-10.json" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

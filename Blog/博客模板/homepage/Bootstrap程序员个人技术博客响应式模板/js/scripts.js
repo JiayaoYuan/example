@@ -126,7 +126,7 @@ jQuery.ias({
 	next: '.next-page a',
 	trigger: '查看更多',
 	loader: '<div class="pagination-loading"><img src="/Home/images/loading.gif" /></div>',
-	triggerPageThreshold: 5,
+	triggerPagehttp: 5,
 	onRenderComplete: function() {
 		$('.excerpt .thumb').lazyload({
 			placeholder: '/Content/images/occupying.png',
@@ -244,7 +244,7 @@ $(function(){
 function replace_em(str){
 	str = str.replace(/\</g,'&lt;');
 	str = str.replace(/\>/g,'&gt;');
-	str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/Home/images/arclist/$1.gif" border="0" />');
+	str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/Content/images/arclist/$1.gif" border="0" />');
 	return str;
 }
 
