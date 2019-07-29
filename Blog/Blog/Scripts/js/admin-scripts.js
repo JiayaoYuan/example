@@ -38,15 +38,15 @@ function getCookie(name) {
     }
 }
 
-var checkall=document.getElementsByName("checkbox[]");  
+var checkall = document.getElementsByClassName("input-control");  
 //全选
-function select(){
+function select() {    
 	for(var $i=0;$i<checkall.length;$i++){  
 		checkall[$i].checked=true;  
 	}  
 };
 //反选
-function reverse(){
+function reverse() {    
 	for(var $i=0;$i<checkall.length;$i++){  
 		if(checkall[$i].checked){  
 			checkall[$i].checked=false;  
@@ -56,7 +56,7 @@ function reverse(){
 	}  
 }     
 //全不选     
-function noselect(){ 
+function noselect() {    
 	for(var $i=0;$i<checkall.length;$i++){  
 		checkall[$i].checked=false;  
 	}  

@@ -127,14 +127,68 @@ namespace Blog.Controllers
                 tb_labels[] labels = db.tb_labels.SqlQuery("select * from tb_labels where label_alias = '" + tb_sorts.sort_name + "'").ToArray();
                 if(labels != null)
                 {
-                    string[] str = HttpContext.Request.Form["keywords"].Split(',');                    
-                    for (int i = 0; i < labels.Length; i++)
-                    {                        
-                        labels[i].label_name = str[i];
-                        //将实体附加到对象管理器中
-                        db.tb_labels.Attach(labels[i]);
-                        // 把当前实体的状态改为Modified
-                        db.Entry(labels[i]).State = EntityState.Modified;                        
+                    string[] str = HttpContext.Request.Form["keywords"].Split(',');
+                    List<string> strList = new List<string>(str);
+                    for (int i = 0; i < str.Length; i++) {
+                        if (str[i] == "") {
+                            strList.RemoveAt(i);
+                        }
+                    }
+                    if (labels.Length == strList.Count())
+                    {
+                        for (int i = 0; i < labels.Length; i++)
+                        {
+                            labels[i].label_name = str[i];
+                            //将实体附加到对象管理器中
+                            db.tb_labels.Attach(labels[i]);
+                            // 把当前实体的状态改为Modified
+                            db.Entry(labels[i]).State = EntityState.Modified;
+                        }
+                    }
+                    if (labels.Length < strList.Count()) {
+                        for (int i = 0; i < labels.Length; i++)
+                        {
+                            labels[i].label_name = str[i];
+                            //将实体附加到对象管理器中
+                            db.tb_labels.Attach(labels[i]);
+                            // 把当前实体的状态改为Modified
+                            db.Entry(labels[i]).State = EntityState.Modified;
+                        }
+                        for (int i = labels.Length; i < strList.Count(); i++)
+                        {
+                            tb_labels label = new tb_labels();
+                            label.label_name = str[i];
+                            label.label_description = "";
+                            label.label_alias = tb_sorts.sort_name;
+                            db.tb_labels.Add(label);
+                            db.SaveChanges();
+                        }
+                    }
+                    if (labels.Length > strList.Count()) {
+                        for (int i = 0; i < strList.Count(); i++)
+                        {
+                            labels[i].label_name = str[i];
+                            //将实体附加到对象管理器中
+                            db.tb_labels.Attach(labels[i]);
+                            // 把当前实体的状态改为Modified
+                            db.Entry(labels[i]).State = EntityState.Modified;
+                        }
+                        for (int i = strList.Count(); i < labels.Length; i++)
+                        {                            
+                            for (int k = 0; k < labels.Length; k++) {
+                                bool isremove = true;
+                                for (int j = 0; j < str.Length; j++)
+                                {
+                                    if (str[k] == labels[j].label_name) {
+                                        isremove = false;
+                                    }
+                                }
+                                if (isremove) {
+                                    db.tb_labels.Remove(labels[i]);
+                                    db.SaveChanges();
+                                }
+                            }                            
+                        }
                     }
                 }
                 db.SaveChanges();

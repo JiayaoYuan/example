@@ -1,11 +1,15 @@
-﻿<!doctype html>
+﻿@{ 
+    
+}
+
+<!doctype html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>异清轩博客管理系统</title>
+    <title>夏河春水博客管理系统</title>
     <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/style2.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/font-awesome.min.css">
@@ -14,6 +18,7 @@
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/js/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/js/manareq.js"></script>
     <!--[if gte IE 9]>
       <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
       <script src="js/html5shiv.min.js" type="text/javascript"></script>
@@ -32,7 +37,7 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        <a class="navbar-brand" href="/">YlsatCMS</a>
+                        <a class="navbar-brand" href="/">夏河春水CMS</a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
@@ -62,12 +67,12 @@
         <div class="row">
             <aside class="col-sm-3 col-md-2 col-lg-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="/YjLihouT/Main/Index">报告</a></li>
+                    <li><a>报告</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="../Articles/Article">文章</a></li>
-                    <li><a href="/YjLihouT/Notice">公告</a></li>
-                    <li><a href="/YjLihouT/Comment">评论</a></li>
+                    <li><a href="/YjLihouT/Articles/Article?page=1">文章</a></li>
+                    <li><a href="/YjLihouT/Main/Notice?page=1">公告</a></li>
+                    <li><a href="/YjLihouT/Comments/Index?page=1">评论</a></li>
                     <li><a data-toggle="tooltip" data-placement="bottom" title="网站暂无留言功能">留言</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
@@ -75,7 +80,7 @@
                     <li>
                         <a class="dropdown-toggle" id="otherMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">其他</a>
                         <ul class="dropdown-menu" aria-labelledby="otherMenu">
-                            <li><a href="/YjLihouT/Flink">友情链接</a></li>
+                            <li><a href="/YjLihouT/Main/Flink?page=1">友情链接</a></li>
                             <li><a data-toggle="modal" data-target="#areDeveloping">访问记录</a></li>
                         </ul>
                     </li>
@@ -104,7 +109,7 @@
                 </ul>
             </aside>
             @RenderBody()
-        </div>        
+        </div>
     </section>
     <!--个人信息模态框-->
     <div class="modal fade" id="seeUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -246,8 +251,11 @@
             <li class="list-group-item"><span>浏览器：</span>Chrome47</li>
         </ul>
     </div>
-    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/js/admin-scripts.js"></script>
-    <script src="~/Scripts/js/manareq.js"></script>
+    <!--summernote富文本编辑器-->
+    <link rel="stylesheet" type="text/css" href="~/Content/lib/summernote/summernote.css">
+    <script src="~/Content/lib/summernote/summernote.js"></script>
+    <script src="~/Content/lib/summernote/lang/summernote-zh-CN.js"></script>    
 </body>
 </html>

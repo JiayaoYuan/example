@@ -34,6 +34,8 @@ namespace Blog.Models
         public Nullable<int> user_age { get; set; }
         public long user_telephone_number { get; set; }
         public string user_nickname { get; set; }
+        public Nullable<long> user_login_count { get; set; }
+        public Nullable<System.DateTime> user_login_time { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_articles> tb_articles { get; set; }

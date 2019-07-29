@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="db_BlogModelStoreContainer" CdmEntityContainer="db_BlogEntities">
+    <EntitySetMapping Name="tb_announcement">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_announcement">
+        <MappingFragment StoreEntitySet="tb_announcement">
+          <ScalarProperty Name="announce_id" ColumnName="announce_id" />
+          <ScalarProperty Name="announce_title" ColumnName="announce_title" />
+          <ScalarProperty Name="announce_content" ColumnName="announce_content" />
+          <ScalarProperty Name="announce_publish_time" ColumnName="announce_publish_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tb_articles">
       <EntityTypeMapping TypeName="db_BlogModel.tb_articles">
         <MappingFragment StoreEntitySet="tb_articles">
@@ -14,6 +24,7 @@
           <ScalarProperty Name="article_comment_count" ColumnName="article_comment_count" />
           <ScalarProperty Name="article_date" ColumnName="article_date" />
           <ScalarProperty Name="article_like_count" ColumnName="article_like_count" />
+          <ScalarProperty Name="article_keyword" ColumnName="article_keyword" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -96,6 +107,8 @@
           <ScalarProperty Name="user_age" ColumnName="user_age" />
           <ScalarProperty Name="user_telephone_number" ColumnName="user_telephone_number" />
           <ScalarProperty Name="user_nickname" ColumnName="user_nickname" />
+          <ScalarProperty Name="user_login_count" ColumnName="user_login_count" />
+          <ScalarProperty Name="user_login_time" ColumnName="user_login_time" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -25,7 +25,7 @@
                     <div class="add-article-box">
                         <h2 class="add-article-box-title"><span>关键字</span></h2>
                         <div id="article_label1" class="add-article-box-content">
-                            <input type="text" class="form-control" placeholder="请输入关键字" value="测试,文章" name="keywords" autocomplete="off">
+                            <input type="text" class="form-control" placeholder="请输入关键字" value="" name="keywords" autocomplete="off">
                             <span class="prompt-text">多个标签请用英文逗号,隔开。</span>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
     window.onresize = function () {
         window.location.reload();
     }
-
+    
     var _uploadEditor;
     $(function () {
         //重新实例化一个编辑器，防止在上面的editor编辑器中显示上传的图片或者文件
@@ -112,8 +112,10 @@
         var proinfo = $("#article_content").text();
         editor.ready(function () {
             editor.setContent(proinfo);
-        })
+        });
 
+        Count("10");
+        Count("18");
     });
     //弹出图片上传的对话框
     $('#upImage').click(function () {

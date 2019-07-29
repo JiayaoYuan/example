@@ -15,7 +15,7 @@ namespace Blog.Models
     public partial class tb_set_article_label
     {
         public long set_article_label_id { get; set; }
-        public long article_id { get; set; }
-        public long label_id { get; set; }
+        public Nullable<long> article_id { get; set; }
+        public Nullable<long> label_id { get; set; }
     }
 }

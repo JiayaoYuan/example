@@ -2,7 +2,7 @@
 /*window.onresize=function(){
     window.location.reload();
 }*/
- 
+
 //页面加载
 $('body').show();
 $('.version').text(NProgress.version);
@@ -17,7 +17,7 @@ setTimeout(function () {
     $('img').attr('draggable', 'false');
     $('a').attr('draggable', 'false');
 })();
- 
+
 //设置Cookie
 function setCookie(name, value, time) {
     var strsec = getsec(time);
@@ -109,33 +109,49 @@ $(".single .content img").lazyload({
 });
  
 //IE6-9禁止用户选中文本
-document.body.onselectstart = document.body.ondrag = function () {
-    return false;
-};
+//document.body.onselectstart = document.body.ondrag = function () {
+//    return false;
+//};
  
 //启用工具提示
 $('[data-toggle="tooltip"]').tooltip();
  
  
 //无限滚动反翻页
-jQuery.ias({
-	history: false,
-	container : '.content',
-	item: '.excerpt',
-	pagination: '.pagination',
-	next: '.next-page a',
-	trigger: '没有更多了',
-	loader: '<div class="pagination-loading"><img src="../Content/images/loading.gif" /></div>',
-    triggerPageThreshold: 4,
-    onRenderComplete: function () {
-        $('.excerpt .thumb').lazyload({
-            placeholder: '/Content/images/occupying.png',
-            threshold: 400
-        });
-        $('.excerpt img').attr('draggable', 'false');
-        $('.excerpt a').attr('draggable', 'false');
-    }
-});
+//$(function () {
+//    var obj = { "pd": "3" };
+//    $.ajax({
+//        type: "post",
+//        url: "/tools/Handler.ashx",
+//        data: obj,
+//        dataType: "json",
+//        success: function (data) {
+//            jQuery.ias({
+//                history: false,
+//                container: '.content',
+//                item: '.excerpt',
+//                pagination: '.pagination',
+//                next: '.next-page a',
+//                trigger: '没有更多了',
+//                loader: '<div class="pagination-loading"><img src="../Content/images/loading.gif"/></div>',
+//                triggerPageThreshold: parseInt(data / 4),
+//                onRenderComplete: function () {
+//                    $('.excerpt .thumb').lazyload({
+//                        placeholder: '/Content/images/occupying.png',
+//                        threshold: 400
+//                    });
+//                    $('.excerpt img').attr('draggable', 'false');
+//                    $('.excerpt a').attr('draggable', 'false');
+//                }
+//            });
+//        },
+//        error: function (XMLHttpRequest, textStatus, errorThrown) {
+//            alert(errorThrown);
+//            alert(XMLHttpRequest);
+//            alert(textStatus);
+//        }
+//    })
+//})
  
 //鼠标滚动超出侧边栏高度绝对定位
 $(window).scroll(function () {
@@ -204,42 +220,42 @@ document.onkeydown=function(event){
 }; 
 
 /*文章评论*/
-$(function(){
-	$("#comment-submit").click(function(){
-		var commentContent = $("#comment-textarea");
-		var commentButton = $("#comment-submit");
-		var promptBox = $('.comment-prompt');
-		var promptText = $('.comment-prompt-text');
-		var articleid = $('.articleid').val();
-		promptBox.fadeIn(400);
-		if(commentContent.val() === ''){
-			promptText.text('请留下您的评论');
-			return false;
-		} 
-		commentButton.attr('disabled',true);
-		commentButton.addClass('disabled');
-		promptText.text('正在提交...');
-		$.ajax({   
-			type:"POST",
-			url:"test.php?id=" + articleid,
-			//url:"/Article/comment/id/" + articleid,   
-			data:"commentContent=" + replace_em(commentContent.val()),   
-			cache:false, //不缓存此页面  
-			success:function(data){
-				alert(data);
-				promptText.text('评论成功!');
-			    commentContent.val(null);
-				$(".commentlist").fadeIn(300);
-				/*$(".commentlist").append();*/
-				commentButton.attr('disabled',false);
-				commentButton.removeClass('disabled');
-			}
-		});
-		/*$(".commentlist").append(replace_em(commentContent.val()));*/
-		promptBox.fadeOut(100);
-		return false;
-	});
-});
+//$(function(){
+//	$("#comment-submit").click(function(){
+//		var commentContent = $("#comment-textarea");
+//		var commentButton = $("#comment-submit");
+//		var promptBox = $('.comment-prompt');
+//		var promptText = $('.comment-prompt-text');
+//		var articleid = $('.articleid').val();
+//		promptBox.fadeIn(400);
+//		if(commentContent.val() === ''){
+//			promptText.text('请留下您的评论');
+//			return false;
+//		} 
+//		commentButton.attr('disabled',true);
+//		commentButton.addClass('disabled');
+//		promptText.text('正在提交...');
+//		$.ajax({   
+//			type:"POST",
+//			url:"test.php?id=" + articleid,
+//			//url:"/Article/comment/id/" + articleid,   
+//			data:"commentContent=" + replace_em(commentContent.val()),   
+//			cache:false, //不缓存此页面  
+//			success:function(data){
+//				alert(data);
+//				promptText.text('评论成功!');
+//			    commentContent.val(null);
+//				$(".commentlist").fadeIn(300);
+//				/*$(".commentlist").append();*/
+//				commentButton.attr('disabled',false);
+//				commentButton.removeClass('disabled');
+//			}
+//		});
+//		/*$(".commentlist").append(replace_em(commentContent.val()));*/
+//		promptBox.fadeOut(100);
+//		return false;
+//	});
+//});
 //对文章内容进行替换
 function replace_em(str){
 	str = str.replace(/\</g,'&lt;');

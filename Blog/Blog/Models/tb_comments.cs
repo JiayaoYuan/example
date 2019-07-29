@@ -15,14 +15,13 @@ namespace Blog.Models
     public partial class tb_comments
     {
         public long comment_id { get; set; }
-        public long user_id { get; set; }
+        public Nullable<long> user_id { get; set; }
         public long article_id { get; set; }
         public long comment_like_count { get; set; }
         public System.DateTime comment_date { get; set; }
         public string comment_content { get; set; }
         public long parent_comment_id { get; set; }
     
-        public virtual tb_articles tb_articles { get; set; }
         public virtual tb_users tb_users { get; set; }
     }
 }

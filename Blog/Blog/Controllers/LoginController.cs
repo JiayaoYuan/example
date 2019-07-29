@@ -41,8 +41,10 @@ namespace Blog.Controllers
                         if (new_user.user_rights == "管理员")
                         {
                             Handler.loginis = true;               //证明用户登录过后台
-                            Handler.id = new_user.user_id;
-                            return RedirectToAction("../Main/Index");
+                            Handler.loginid = new_user.user_id;
+                            tb_users user = new tb_users();
+                            user.user_name = new_user.user_name;
+                            return RedirectToAction("../Main/Index", user);
                         }
                         Response.Write("<script>您不是管理员不能登录后台！</script>");
                     }

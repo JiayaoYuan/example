@@ -93,7 +93,7 @@
 		function w(t) {
 			var r = e(".ias_trigger");
 			return r.size() === 0 && (r = e('<div class="ias_trigger"><a href="javascript:;">' + n.trigger + "</a></div>"), r.hide()), e("a", r).unbind("click").bind("click", function() {
-				return S(), t.call(), !1
+				//return S(), t.call(), !1
 			}), r
 		}
 		function E(t) {

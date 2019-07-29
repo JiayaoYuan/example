@@ -15,7 +15,7 @@ namespace Blog.Models
     public partial class tb_set_article_sort
     {
         public long set_article_sort_id { get; set; }
-        public long article_id { get; set; }
-        public long sort_id { get; set; }
+        public Nullable<long> article_id { get; set; }
+        public Nullable<long> sort_id { get; set; }
     }
 }

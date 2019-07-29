@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, button, input, fieldset, legend, input, textarea, p, blockquote, th, td, article, aside, details, figcaption, figure, #footer, #header, hgroup, menu, nav, section {
 	margin: 0;
 	padding: 0;
@@ -48,6 +48,7 @@ a:hover {
 li {
 	display: list-item;
 	list-style: none;
+    position: relative;
 	text-align: -webkit-match-parent;
 }
 li.active {
@@ -135,13 +136,13 @@ body, input, button, textarea, select {
 	src: url('../fonts/TaurusNormal.woff') format('woff'), url('../fonts/TaurusNormal.ttf') format('truetype'), url('../fonts/TaurusNormal.svg') format('svg');
 }
 /*禁止文字选中*/
-.user-select {
+/*.user-select {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-khtml-user-select: none;
 	user-select: none;
-}
+}*/
 /*鼠标选中内容样式*/
 ::selection {
 	background: #444;
@@ -1231,7 +1232,6 @@ color:#FFF;
 	background-color: #fff;
 	border-radius: 4px;
 	border: 1px solid #eaeaea;
-	overflow: hidden;
 }
 .widget h3 {
 	font-size: 18px;
@@ -1384,8 +1384,8 @@ color:#FFF;
 	margin-bottom: 0;
 }
 .widget_hot .thumbnail img {
-	width: 122px;
-	height: 86px;
+	width: 127px;
+	height: 87px;
 }
 .widget_hot .text {
 	display: block;
@@ -2195,4 +2195,88 @@ color:#FFF;
 }
 #loginModal .modal-body input {
 	color: #A0A0A0;
+}
+#areDeveloping .modal-body p {
+    padding: 15px 15px 15px 100px;
+    position: absolute;
+    top: 15px;
+    cursor: default;
+}
+#areNotice .modal-body p {
+    padding: 15px 15px 15px 100px;
+    position: absolute;
+    top: 15px;
+    cursor: default;
+}
+.live-search {
+    z-index: 999;
+    position: absolute;
+    float: left;    
+    width: 100%;
+    opacity: .98;
+    top: 100%;
+    left: 0;
+}
+.ltr {
+    right: 0;
+}
+element.style {
+}
+.live-search ul {
+    background: #fff;
+}
+.live-search ul {
+    float: left;
+    width: 100%;
+    box-shadow: 0 10px 20px -3px rgba(0,0,0,0.52);
+    margin-top: 0;
+}
+.live-search ul li:first-child {
+    border-top: solid 1px #eceff5;
+}
+.live-search ul li {
+    border-bottom: solid 1px #eceff5;
+}
+.live-search ul li {
+    float: left;
+    width: 100%;
+    display: block;
+    padding: 12px;
+}
+.live-search ul li a.more {
+    font-weight: 500;
+    width: 100%;
+    float: left;
+    padding: 5px;
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+}
+.live-search ul li .poster {
+    float: left;
+    display: inline-block;
+    margin-right: 10px;
+    width: 70px;
+    height: 55px;
+    overflow: hidden;
+}
+.live-search ul li .poster img {
+    height: auto;
+    width: 100%;
+}
+.live-search ul li .title {
+    margin-top: 2px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #222d34;
+}
+.live-search ul li .release {
+    margin-left: 5px;
+    font-size: 11px;
+    font-weight: 400;
 }

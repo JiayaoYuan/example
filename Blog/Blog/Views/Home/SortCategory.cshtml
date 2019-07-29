@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Blog.Models.tb_articles>
+
+@{ 
+    long page = Convert.ToInt32(Session["sortpage"].ToString());
+    long sort_id = Convert.ToInt32(Session["sort_id"].ToString());
+}
+
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <div class="title">
+                <h3></h3>
+            </div>
+            @foreach (var item in Model)
+            {
+                if (item != null)
+                {
+                    <article class="excerpt">
+                        <a class="focus" href="/Home/article?id=@item.article_id" title=""><img class="thumb" data-original="@item.article_label_img" src="@item.article_label_img" alt=""></a>
+                        <header>
+                            <a class="cat" href="program"><i></i></a>
+                            <h2><a href="/Home/article?id=@item.article_id" title="">@item.article_title</a></h2>
+                        </header>
+                        <p class="meta">
+                            <time class="time"><i class="glyphicon glyphicon-time"></i>@item.article_date</time>
+                            <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 共 @item.article_views 人围观</span> <a class="comment" href="article.html#comment"><i class="glyphicon glyphicon-comment"></i> @item.article_comment_count 个不明物体</a>
+                        </p>
+                        <p class="note">@item.article_description... </p>
+                    </article>
+                }                
+            }
+            <nav class="pagination" style="display: none;">
+                <ul>
+                    <li class="prev-page"></li>
+                    <li class="active"><span>1</span></li>
+                    <li><a href="?page=2">2</a></li>
+                    <li class="next-page">
+                        @Html.ActionLink("下一页", "SortCategory", new { page = page + 1, sort_id = sort_id})
+                    </li>
+                    <li><span>共 2 页</span></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <aside class="sidebar">
+        <div class="fixed">
+            <div class="widget widget_search">
+                <form class="navbar-form" action="/Home/Index" method="get">
+                    <div class="input-group">
+                        <input type="text" name="s" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-search" type="submit">搜索</button>
+                        </span>
+                    </div>
+                </form>
+                <div class="live-search ltr" style="display: none;"></div>
+            </div>
+            <div class="widget widget_sentence">
+                <h3>每日一句</h3>
+                <div class="widget-sentence-content">
+                    
+                </div>
+            </div>
+        </div>
+        <div id="widget_hot_article" class="widget widget_hot">
+            <h3>热门文章</h3>
+            <ul>
+                    
+            </ul>
+        </div>
+    </aside>
+</section>

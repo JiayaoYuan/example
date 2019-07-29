@@ -66,11 +66,42 @@ Class MultiformProcessor
     public Function Process()
         Dim formBytes, bLen, pBgn, pEnd, header, stream
         Dim varPtn, filePtn, formValues, key, field
+        
+        Set stream = OpenStream( adTypeBinary )       
 
-        formBytes = Request.BinaryRead( Request.TotalBytes )
+         '循环分块读取
 
-        Set stream = OpenStream( adTypeBinary )
-            stream.Write formBytes
+        dim ReadBytes,nTotalBytes
+
+         ReadBytes = 0
+
+         nTotalBytes = Request.TotalBytes
+
+         Do While ReadBytes < nTotalBytes
+
+         '分块读取
+
+            nPartBytes = 64 * 1024 '分成每块64k
+
+             If nPartBytes + ReadBytes > nTotalBytes Then
+
+                 nPartBytes = nTotalBytes - ReadBytes
+
+             End If
+
+             stream.Write Request.BinaryRead(nPartBytes)
+
+             ReadBytes = ReadBytes + nPartBytes
+
+         Loop      
+
+         stream.Position = 0
+
+         formBytes = stream.Read
+        'formBytes = Request.BinaryRead( Request.TotalBytes )
+
+        'Set stream = OpenStream( adTypeBinary )
+        '    stream.Write formBytes
 
         Set varPtn = new RegExp
             varPtn.Pattern = "(\w+?)=""(.+?)"""

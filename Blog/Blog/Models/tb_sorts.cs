@@ -18,6 +18,6 @@ namespace Blog.Models
         public string sort_name { get; set; }
         public string sort_alias { get; set; }
         public string sort_description { get; set; }
-        public Nullable<long> parent_sort_id { get; set; }
+        public long parent_sort_id { get; set; }
     }
 }
