@@ -105,9 +105,10 @@ select * from tb_sorts
 delete from tb_labels where label_id = 20
 select * from tb_comments
 select * from tb_set_article_sort
-select * from tb_articles
+select * from tb_articles order by article_id desc
 select * from tb_set_article_label
 select * from tb_labels
+select from tb_comments where comment_id = 29
 insert into tb_sorts(sort_name, sort_alias, sort_description, parent_sort_id) values 
 ('前端技术','web','前端开发是创建Web页面或app等前端界面呈现给用户的过程，通过HTML，CSS及JavaScript以及衍生出来的各种技术、框架、解决方案，来实现互联网产品的用户界面交互 [1]  。它从网页制作演变而来，名称上有很明显的时代特征。在互联网的演化进程中，网页制作是Web1.0时代的产物，早期网站主要内容都是静态，以图片和文字为主，用户使用网站的行为也以浏览为主。随着互联网技术的发展和HTML5、CSS3的应用，现代网页更加美观，交互效果显著，功能更加强大。',0),
 ('后端程序','program','后端开发就是开发人员编写的不能直接看到的代码。',0),

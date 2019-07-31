@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_BlogModelStoreContainer" CdmEntityContainer="db_BlogEntities">
+    <EntitySetMapping Name="tb_announcement">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_announcement">
+        <MappingFragment StoreEntitySet="tb_announcement">
+          <ScalarProperty Name="announce_id" ColumnName="announce_id" />
+          <ScalarProperty Name="announce_title" ColumnName="announce_title" />
+          <ScalarProperty Name="announce_content" ColumnName="announce_content" />
+          <ScalarProperty Name="announce_publish_time" ColumnName="announce_publish_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_articles">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_articles">
+        <MappingFragment StoreEntitySet="tb_articles">
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="article_title" ColumnName="article_title" />
+          <ScalarProperty Name="article_content" ColumnName="article_content" />
+          <ScalarProperty Name="article_description" ColumnName="article_description" />
+          <ScalarProperty Name="article_label_img" ColumnName="article_label_img" />
+          <ScalarProperty Name="article_views" ColumnName="article_views" />
+          <ScalarProperty Name="article_comment_count" ColumnName="article_comment_count" />
+          <ScalarProperty Name="article_date" ColumnName="article_date" />
+          <ScalarProperty Name="article_like_count" ColumnName="article_like_count" />
+          <ScalarProperty Name="article_keyword" ColumnName="article_keyword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_comments">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_comments">
+        <MappingFragment StoreEntitySet="tb_comments">
+          <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+          <ScalarProperty Name="comment_like_count" ColumnName="comment_like_count" />
+          <ScalarProperty Name="comment_date" ColumnName="comment_date" />
+          <ScalarProperty Name="comment_content" ColumnName="comment_content" />
+          <ScalarProperty Name="parent_comment_id" ColumnName="parent_comment_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_friend_links">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_friend_links">
+        <MappingFragment StoreEntitySet="tb_friend_links">
+          <ScalarProperty Name="friend_link_id" ColumnName="friend_link_id" />
+          <ScalarProperty Name="friend_links" ColumnName="friend_links" />
+          <ScalarProperty Name="friend_link_name" ColumnName="friend_link_name" />
+          <ScalarProperty Name="friend_link_description" ColumnName="friend_link_description" />
+          <ScalarProperty Name="friend_link_logo" ColumnName="friend_link_logo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_labels">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_labels">
+        <MappingFragment StoreEntitySet="tb_labels">
+          <ScalarProperty Name="label_id" ColumnName="label_id" />
+          <ScalarProperty Name="label_name" ColumnName="label_name" />
+          <ScalarProperty Name="label_alias" ColumnName="label_alias" />
+          <ScalarProperty Name="label_description" ColumnName="label_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_set_article_label">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_label">
+        <MappingFragment StoreEntitySet="tb_set_article_label">
+          <ScalarProperty Name="set_article_label_id" ColumnName="set_article_label_id" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+          <ScalarProperty Name="label_id" ColumnName="label_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_set_article_sort">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_sort">
+        <MappingFragment StoreEntitySet="tb_set_article_sort">
+          <ScalarProperty Name="set_article_sort_id" ColumnName="set_article_sort_id" />
+          <ScalarProperty Name="article_id" ColumnName="article_id" />
+          <ScalarProperty Name="sort_id" ColumnName="sort_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_sorts">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_sorts">
+        <MappingFragment StoreEntitySet="tb_sorts">
+          <ScalarProperty Name="sort_id" ColumnName="sort_id" />
+          <ScalarProperty Name="sort_name" ColumnName="sort_name" />
+          <ScalarProperty Name="sort_alias" ColumnName="sort_alias" />
+          <ScalarProperty Name="sort_description" ColumnName="sort_description" />
+          <ScalarProperty Name="parent_sort_id" ColumnName="parent_sort_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_users">
+      <EntityTypeMapping TypeName="db_BlogModel.tb_users">
+        <MappingFragment StoreEntitySet="tb_users">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_ip" ColumnName="user_ip" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_password" ColumnName="user_password" />
+          <ScalarProperty Name="user_email" ColumnName="user_email" />
+          <ScalarProperty Name="user_profile_photo" ColumnName="user_profile_photo" />
+          <ScalarProperty Name="user_level" ColumnName="user_level" />
+          <ScalarProperty Name="user_rights" ColumnName="user_rights" />
+          <ScalarProperty Name="user_registration_time" ColumnName="user_registration_time" />
+          <ScalarProperty Name="user_birthday" ColumnName="user_birthday" />
+          <ScalarProperty Name="user_age" ColumnName="user_age" />
+          <ScalarProperty Name="user_telephone_number" ColumnName="user_telephone_number" />
+          <ScalarProperty Name="user_nickname" ColumnName="user_nickname" />
+          <ScalarProperty Name="user_login_count" ColumnName="user_login_count" />
+          <ScalarProperty Name="user_login_time" ColumnName="user_login_time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

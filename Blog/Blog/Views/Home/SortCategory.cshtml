@@ -3,6 +3,7 @@
 @{ 
     long page = Convert.ToInt32(Session["sortpage"].ToString());
     long sort_id = Convert.ToInt32(Session["sort_id"].ToString());
+    int articlenum = Convert.ToInt32(Session["articleCount"].ToString());
 }
 
 <section class="container">
@@ -13,9 +14,10 @@
             </div>
             @foreach (var item in Model)
             {
+                articlenum++;
                 if (item != null)
                 {
-                    <article class="excerpt">
+                    <article class="excerpt excerpt_@articlenum">
                         <a class="focus" href="/Home/article?id=@item.article_id" title=""><img class="thumb" data-original="@item.article_label_img" src="@item.article_label_img" alt=""></a>
                         <header>
                             <a class="cat" href="program"><i></i></a>

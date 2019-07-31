@@ -111,7 +111,7 @@ namespace Blog.Controllers
             friend_links.friend_link_description = HttpContext.Request.Form["describe"];
             db.tb_friend_links.Add(friend_links);
             db.SaveChanges();
-            return RedirectToAction("Flink");
+            return Redirect("Flink?page=1");
         }
 
         public ActionResult DeleteFlink(long? id) {
@@ -126,7 +126,7 @@ namespace Blog.Controllers
             }
             db.tb_friend_links.Remove(friend_links);
             db.SaveChanges();
-            return RedirectToAction("Flink");
+            return Redirect("Flink?page=1");
         }
 
         [HttpPost]
@@ -142,7 +142,7 @@ namespace Blog.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("Flink");
+            return Redirect("Flink?page=1");
         }
 
         public ActionResult Notice(int page) {
@@ -170,7 +170,7 @@ namespace Blog.Controllers
             }
             db.tb_announcement.Remove(announce);
             db.SaveChanges();
-            return RedirectToAction("Notice");
+            return Redirect("Notice?page=1");
         }
 
         [HttpPost]
@@ -183,7 +183,7 @@ namespace Blog.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("Notice");
+            return Redirect("Notice?page=1");
         }
 
         public ActionResult AddNotice() {
@@ -199,7 +199,7 @@ namespace Blog.Controllers
             tb_announcement.announce_publish_time = DateTime.Now.GetDateTimeFormats('M')[0].ToString();
             db.tb_announcement.Add(tb_announcement);
             db.SaveChanges();
-            return RedirectToAction("Notice");
+            return Redirect("Notice?page=1");
         }
     }
 }

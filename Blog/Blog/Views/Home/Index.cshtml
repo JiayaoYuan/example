@@ -3,6 +3,7 @@
 @{ 
     string searchname = Session["SearchName"].ToString();
     long page = Convert.ToInt32(Session["homepage"].ToString());
+    int articlenum = Convert.ToInt32(Session["articleCount"].ToString());
 }
 
 <section class="container">
@@ -47,7 +48,8 @@
             {
                 if (item != null)
                 {
-                    <article class="excerpt">
+                    articlenum++;                    
+                    <article class="excerpt excerpt_@articlenum">
                         <a class="focus" href="/Home/article?id=@item.article_id" title=""><img class="thumb" data-original="@item.article_label_img" src="@item.article_label_img" alt=""></a>
                         <header>
                             <a class="cat" href="program"><i></i></a>
@@ -79,7 +81,7 @@
                     <li class="active"><span>1</span></li>
                     <li><a href="?page=2">2</a></li>
                     <li class="next-page">
-                        @Html.ActionLink("下一页", "Index", new { page = page + 1,s = searchname })
+                        @Html.ActionLink("下一页", "Index", new { page = page + 1, s = searchname})
                     </li>
                     <li><span>共 2 页</span></li>
                 </ul>

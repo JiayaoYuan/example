@@ -119,8 +119,30 @@ function SetSortAndLabel() {
     })
 }
 
+//评论个数
+function SetTheFontPaging() {
+    var pageCount = 0;
+    var obj = { "pd": "22", "PageClass": "Comments" };
+    $.ajax({
+        type: "post",
+        url: "/tools/Handler.ashx",
+        data: obj,
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            if (data.status != "-1") {
+                pageCount = Math.ceil(data.status / 15);                
+            }
+        },
+        error: function (XMLHttpRequest, textStartus, errorThrown) {
+            alert(errorThrown);
+        }
+    });    
+    return pageCount;
+}
+
 //添加评价
-function AddComment(article_id, user_id, action) {
+function AddComment(article_id, user_id, action) {    
     var commentContent = $("#comment-textarea");
     var commentButton = $("#comment-submit");
     var promptBox = $('.comment-prompt');
@@ -147,9 +169,37 @@ function AddComment(article_id, user_id, action) {
                 commentContent.val(null);
                 commentButton.attr('disabled', false);
                 commentButton.removeClass('disabled');                
-                var json = eval("(" + data.status + ")");                
-                $.each(json.root, function (Index, item) {                    
-                    $("#postcomments .commentlist").prepend("<li class= 'comment-content'><i class='fa fa-thumbs-up comment-f' aria-hidden='true'></i><div class='comment-avatar'><img class='avatar' src='../Content/images/icon/icon.png' alt='' /></div><div class='comment-main'><p>" + item.user_rights + "<span class='address'>" + item.user_name + "</span><span class='time'>(" + item.comment_date + ")</span><br />" + item.comment_content + "</p></div></li >");
+                var json = eval("(" + data.status + ")");
+                var pagenum = SetTheFontPaging();                
+                for (var i = 2; i <= pagenum; i++) {
+                    if ($("#postcomments .quotes .current_" + i).text() == "") {
+                        $("#postcomments .quotes .current_" + (i - 1)).after("<a class='current_" + i + "'>" + i + "</a>");
+                    }                    
+                }
+                if (pagenum >= 2) {
+
+                }
+                $("#postcomments .quotes a").click(function () {                    
+                    $("#postcomments .commentlist").empty();
+                    var oldthis = $(this);                                        
+                    for (var i = 1; i <= $("#postcomments .quotes a").length; i++) {
+                        $("#postcomments .quotes .current_" + i).attr("class", "");
+                    }
+                    $(this).attr("class", "current current_" + $(this).text());
+                    $.each(json.root, function (Index, item) {
+                        for (var j = ((parseInt(oldthis.text()) - 1) * 15); j < (parseInt(oldthis.text()) * 15); j++) {
+                            if (Index == j) {
+                                $("#postcomments .commentlist").prepend("<li class= 'comment-content'><i class='fa fa-thumbs-up comment-f' aria-hidden='true'></i><div class='comment-avatar'><img class='avatar' src='../Content/images/icon/icon.png' alt='' /></div><div class='comment-main'><p>" + item.user_rights + "<span class='address'>" + item.user_name + "</span><span class='time'>(" + item.comment_date + ")</span><br />" + item.comment_content + "</p></div></li >");
+                            }
+                        }
+                    })
+                })
+                $.each(json.root, function (Index, item) {
+                    for (var j = 0; j < 15; j++) {
+                        if (Index == j) {
+                            $("#postcomments .commentlist").prepend("<li class= 'comment-content'><i class='fa fa-thumbs-up comment-f' aria-hidden='true'></i><div class='comment-avatar'><img class='avatar' src='../Content/images/icon/icon.png' alt='' /></div><div class='comment-main'><p>" + item.user_rights + "<span class='address'>" + item.user_name + "</span><span class='time'>(" + item.comment_date + ")</span><br />" + item.comment_content + "</p></div></li >");
+                        }
+                    }
                 })
             } else {
                 alert("this is ok");

@@ -71,7 +71,7 @@ namespace Blog.Controllers
             {
                 db.Entry(tb_comments).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("Index?page=1");
             }
             ViewBag.user_id = new SelectList(db.tb_users, "user_id", "user_ip", tb_comments.user_id);
             return View(tb_comments);
@@ -91,7 +91,7 @@ namespace Blog.Controllers
             }
             db.tb_comments.Remove(tb_comments);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("Index?page=1");
         }
 
         [HttpPost]
@@ -107,7 +107,7 @@ namespace Blog.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("Index");
+            return Redirect("Index?page=1");
         }
 
         // POST: Comments/Delete/5
@@ -118,7 +118,7 @@ namespace Blog.Controllers
             tb_comments tb_comments = db.tb_comments.Find(id);
             db.tb_comments.Remove(tb_comments);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("Index?page=1");
         }
 
         protected override void Dispose(bool disposing)

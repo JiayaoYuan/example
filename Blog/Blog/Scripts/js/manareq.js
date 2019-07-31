@@ -392,7 +392,7 @@ function PointSort(sort_name) {
     })
 }
 
-//分页栏
+//后台分页栏
 function SetPaging(PageClass) {
     var oldlinum = parseInt($(".message_footer ul >li:first-child i").text());    
     var nowlinum = 0;

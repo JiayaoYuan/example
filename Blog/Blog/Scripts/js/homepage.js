@@ -5,7 +5,7 @@
     GetArticleModel1("20");
     GetArticleModel1("21");
     EveryDayOneWord();
-    LocalSearch()
+    LocalSearch();    
 })
 
 function GetArticleModel1(index) {
@@ -17,7 +17,7 @@ function GetArticleModel1(index) {
         dataType: "json",
         success: function (data) {
             switch (index) {               
-                case "10": //文章分类导航
+                case "10": //文章分类导航                    
                     //var str = new Array();
                     //var sortcount = 0;  //分类导航个数
                     var activeTag = "";
@@ -62,9 +62,24 @@ function GetArticleModel1(index) {
                     if ($(sessionStorage.getItem("active")).selector == $("#header-navbar ul li:nth-child(1) a").text()) {
                         $("#header-navbar ul li:nth-child(1)").attr("class", "hidden-index active");
                         SortToArticle_IndexCount();
-                    }                   
-                    $(".content .title h3").text($(sessionStorage.getItem("active")).selector);
-                    $(".excerpt header .cat i").after($(sessionStorage.getItem("active")).selector);                    
+                    }
+                    var setInter = setInterval(function () {                        
+                        $(".content .title h3").text($(sessionStorage.getItem("active")).selector);                        
+                        for (var i = 1; i <= $(".excerpt").length; i++) {                            
+                            //alert($(".content .excerpt_" + i + " header .cat").text());
+                            if ($(".content .excerpt_" + i + " header .cat").text() == "") {
+                                if ($(sessionStorage.getItem("active")).selector != "") {
+                                    $(".content .excerpt_" + i + " header .cat i").after($(sessionStorage.getItem("active")).selector);
+                                } else {
+                                    $(".content .excerpt_" + i + " header .cat i").after($(".content .excerpt_" + (i - 1) + " header .cat").text());
+                                }
+                                
+                            };
+                        };
+                        if ($(".ias_trigger a").text() == "没有更多了") {
+                            clearInterval(setInter);
+                        }
+                    }, 1000);  
                     if (activeTag != "") {                        
                         $("#label h3").text($(sessionStorage.getItem("activeTag")).selector);
                         $("#label header .cat").text("");

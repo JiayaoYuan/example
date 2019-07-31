@@ -26,9 +26,10 @@ namespace Blog.Controllers
                 }
                 else {
                     articles = db.tb_articles.SqlQuery("select * from tb_articles where article_id = 0").ToArray();
-                }
+                }                
                 HttpContext.Session["SearchName"] = s;
                 HttpContext.Session["homepage"] = page;
+                HttpContext.Session["articleCount"] = (page -1 ) * 4;
                 return View(articles);
             }
             articles = db.tb_articles.SqlQuery("select top 4 * from tb_articles where article_id not in (select top " + (page - 1) * 4 + " article_id from tb_articles order by article_id desc) order by article_id desc").ToArray();
@@ -43,6 +44,7 @@ namespace Blog.Controllers
             s = "";
             HttpContext.Session["SearchName"] = s;
             HttpContext.Session["homepage"] = page;
+            HttpContext.Session["articleCount"] = (page - 1) * 4;
             return View(articles);
         }
 
@@ -66,6 +68,7 @@ namespace Blog.Controllers
             }
             HttpContext.Session["sortpage"] = page;
             HttpContext.Session["sort_id"] = sort_id;
+            HttpContext.Session["articleCount"] = (page - 1) * 4;
             return View(articles);
         }
 
@@ -91,6 +94,7 @@ namespace Blog.Controllers
             }
             HttpContext.Session["labelpage"] = page;
             HttpContext.Session["label_id"] = label_id;
+            HttpContext.Session["articleCount"] = (page - 1) * 4;
             return View(articles);
         }
 

@@ -2204,14 +2204,17 @@ color:#FFF;
 }
 #areNotice .modal-body p {
     padding: 15px 15px 15px 100px;
-    position: absolute;
-    top: 15px;
     cursor: default;
+}
+#areNotice .modal-body img {
+    position: absolute;
+    top: 50%;
+    margin-top: -50px;
 }
 .live-search {
     z-index: 999;
     position: absolute;
-    float: left;    
+    float: left;
     width: 100%;
     opacity: .98;
     top: 100%;

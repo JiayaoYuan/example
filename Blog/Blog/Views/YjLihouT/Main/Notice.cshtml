@@ -29,8 +29,7 @@
                             <td><input type="checkbox" class="input-control" name="checkbox&@item.announce_id" value="" /></td>
                             <td class="article-title">@item.announce_title</td>
                             <td>@item.announce_publish_time</td>
-                            <td>
-                                <a href="">修改</a>
+                            <td>                                
                                 @Html.ActionLink("删除", "DeleteNotice", new { id = item.announce_id })
                             </td>
                         </tr>

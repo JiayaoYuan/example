@@ -298,28 +298,53 @@ namespace Blog.tools
             {
                 SqlParameter[] Index = { };
                 DataTable dt;
-                dt = DB.SqlQueryForDataTatable(db.Database, "select top 1 * from tb_comments a join tb_users b on a.user_id = b.user_id where a.article_id = " + context.Request.Form["article_id"] + "order by a.comment_id desc", Index);
-                string json = DB.TableDoubleSingleMark(dt);
-                context.Response.Write("{\"status\":\"" + json + "\"}");
-            }
-            else if (context.Request.Form["action"] == "")
-            {
-                SqlParameter[] Index = { };
-                DataTable dt;
-                if (loginis) {
-                    dt = DB.SqlQueryForDataTatable(db.Database, "select * from tb_comments a join tb_users b on a.user_id = b.user_id where a.article_id = " + context.Request.Form["article_id"] + "order by a.comment_id desc", Index);
+                if (loginis)
+                {
+                    dt = DB.SqlQueryForDataTatable(db.Database, "select top 1 * from tb_comments a join tb_users b on a.user_id = b.user_id where a.article_id = " + context.Request.Form["article_id"] + "order by a.comment_id desc", Index);
                     string json = DB.TableDoubleSingleMark(dt);
                     context.Response.Write("{\"status\":\"" + json + "\"}");
                 }
                 else
                 {
-                    dt = DB.SqlQueryForDataTatable(db.Database, "select * from tb_comments where tb_comments.article_id = " + context.Request.Form["article_id"], Index);
+                    dt = DB.SqlQueryForDataTatable(db.Database, "select top 1 * from tb_comments where user_id is null order by comment_id desc", Index);
                     string json = DB.TableDoubleSingleMark(dt);
                     string ranstr = "abcdefghijklmnopqrstuvwxyz123456789";
-                    json = json.Replace("\\n", "");                    
-                    json = json.Replace("root:[{", "root:[{\\\"user_rights\\\":\\\"游客\\\",\\\"user_name\\\":\\\""+ new GetIPAndMac().getRandomStr(ranstr, 9) + "\\\",");
+                    json = json.Replace("\\n", "");
+                    json = json.Replace("root:[{", "root:[{\\\"user_rights\\\":\\\"游客\\\",\\\"user_name\\\":\\\"" + new GetIPAndMac().getRandomStr(ranstr, 9) + "\\\",");
                     context.Response.Write("{\"status\":\"" + json + "\"}");
-                }                
+                }
+            }
+            else if (context.Request.Form["action"] == "")
+            {
+                SqlParameter[] Index = { };
+                DataTable dt;
+                string nowJson = "{root:[";
+                tb_comments[] comments = db.tb_comments.SqlQuery("select * from tb_comments").ToArray();
+                foreach (tb_comments item in comments)
+                {
+                    string json = "";
+                    if (item.user_id != null)
+                    {
+                        dt = DB.SqlQueryForDataTatable(db.Database, "select * from tb_comments a join tb_users b on a.user_id = b.user_id where a.article_id = " + context.Request.Form["article_id"] + "order by a.comment_id desc", Index);
+                        json = DB.TableDoubleSingleMark(dt);
+                        json = json.Replace("{root:[", "");
+                        json = json.Replace("]}", ",");
+                        nowJson = nowJson + json;
+                    }
+                    else
+                    {
+                        dt = DB.SqlQueryForDataTatable(db.Database, "select * from tb_comments where comment_id = " + item.comment_id, Index);
+                        json = DB.TableDoubleSingleMark(dt);
+                        string ranstr = "abcdefghijklmnopqrstuvwxyz123456789";
+                        json = json.Replace("\\n", "");
+                        json = json.Replace("root:[{", "root:[{\\\"user_rights\\\":\\\"游客\\\",\\\"user_name\\\":\\\"" + new GetIPAndMac().getRandomStr(ranstr, 9) + "\\\",");
+                        json = json.Replace("{root:[", "");
+                        json = json.Replace("]}", ",");
+                        nowJson = nowJson + json;
+                    }
+                }
+                nowJson = nowJson.Substring(0, nowJson.Length - 1) + "]}";
+                context.Response.Write("{\"status\":\"" + nowJson + "\"}");                
             }
             else
             {
@@ -399,27 +424,37 @@ namespace Blog.tools
         //分页li个数
         private void PagingCount(HttpContext context) {
             string pageclass = context.Request.Form["PageClass"];
-            switch (pageclass) {
-                case "Comments":
-                    tb_comments[] comments = db.tb_comments.SqlQuery("select * from tb_comments").ToArray();
-                    context.Response.Write("{\"status\":\"" + comments.Length + "\"}");
-                    break;
-                case "Articles":
-                    tb_articles[] articles = db.tb_articles.SqlQuery("select * from tb_articles").ToArray();
-                    context.Response.Write("{\"status\":\"" + articles.Length + "\"}");
-                    break;
-                case "Notices":
-                    tb_announcement[] notices = db.tb_announcement.SqlQuery("select * from tb_announcement").ToArray();
-                    context.Response.Write("{\"status\":\"" + notices.Length + "\"}");
-                    break;
-                case "Flinks":
-                    tb_friend_links[] flinks = db.tb_friend_links.SqlQuery("select * from tb_friend_links").ToArray();
-                    context.Response.Write("{\"status\":\"" + flinks.Length + "\"}");
-                    break;
-                default:
-                    context.Response.Write("{\"status\":\"-1\"}");
-                    break;
+            bool isTheFont = Convert.ToBoolean(context.Request.Form["isTheFont"]);
+
+            if (!isTheFont)
+            {
+                switch (pageclass)
+                {
+                    case "Comments":
+                        tb_comments[] comments = db.tb_comments.SqlQuery("select * from tb_comments").ToArray();
+                        context.Response.Write("{\"status\":\"" + comments.Length + "\"}");
+                        break;
+                    case "Articles":
+                        tb_articles[] articles = db.tb_articles.SqlQuery("select * from tb_articles").ToArray();
+                        context.Response.Write("{\"status\":\"" + articles.Length + "\"}");
+                        break;
+                    case "Notices":
+                        tb_announcement[] notices = db.tb_announcement.SqlQuery("select * from tb_announcement").ToArray();
+                        context.Response.Write("{\"status\":\"" + notices.Length + "\"}");
+                        break;
+                    case "Flinks":
+                        tb_friend_links[] flinks = db.tb_friend_links.SqlQuery("select * from tb_friend_links").ToArray();
+                        context.Response.Write("{\"status\":\"" + flinks.Length + "\"}");
+                        break;
+                    default:
+                        context.Response.Write("{\"status\":\"-1\"}");
+                        break;
+                }
             }
+            else {
+
+            }
+            
         }
 
         //指定搜索
