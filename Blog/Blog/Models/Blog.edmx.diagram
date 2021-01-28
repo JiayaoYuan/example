@@ -4,18 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="597f0510114146a284b29bd3a344b92e" Name="Diagram1">
-        <EntityTypeShape EntityType="db_BlogModel.tb_announcement" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_articles" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_comments" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_friend_links" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_labels" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_set_article_label" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_set_article_sort" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_sorts" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_BlogModel.tb_users" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
-        <AssociationConnector Association="db_BlogModel.FK__tb_articl__user___095F58DF" ManuallyRouted="false" />
-        <AssociationConnector Association="db_BlogModel.FK__tb_commen__user___611C5D5B" ManuallyRouted="false" />
+      <Diagram DiagramId="4a580fdc577d4177829afbe57c332704" Name="Diagram1">
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_announcement" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_articles" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_comments" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_friend_links" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_labels" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_set_article_label" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_set_article_sort" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_sorts" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bds260192421_dbModel.tb_users" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="bds260192421_dbModel.FK__tb_articl__user___095F58DF" ManuallyRouted="false" />
+        <AssociationConnector Association="bds260192421_dbModel.FK__tb_commen__user___7F2BE32F" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

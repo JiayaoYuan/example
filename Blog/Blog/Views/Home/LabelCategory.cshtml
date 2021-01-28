@@ -37,7 +37,7 @@
                     <li class="active"><span>1</span></li>
                     <li><a href="?page=2">2</a></li>
                     <li class="next-page">
-                        @Html.ActionLink("下一页", "LabelCategory", new { page = page + 1, sort_id = label_id })
+                        @Html.ActionLink("下一页", "LabelCategory", new { page = page + 1, label_id = label_id })
                     </li>
                     <li><span>共 2 页</span></li>
                 </ul>

@@ -100,7 +100,7 @@ function GetArticleModel1(index) {
                         var json1 = eval("(" + data.status1 + ")");                        
                         $.each(json1, function (Index, item) {
                             var label = eval("(" + item + ")");
-                            if (label.label_name != "") {
+                            if (label.label_name != "" && label.label_id) {
                                 $("#ptags").append("<li><a href='/Home/LabelCategory?label_id=" + label.label_id + "' title=''>" + label.label_name + " <span class='badge'>" + label.articleCount + "</span></a></li>")                                
                             }
                         })

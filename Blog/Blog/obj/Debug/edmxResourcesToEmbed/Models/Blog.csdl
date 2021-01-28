@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="db_BlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="bds260192421_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="tb_announcement">
     <Key>
       <PropertyRef Name="announce_id" />
@@ -37,7 +37,7 @@
     <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="parent_comment_id" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="tb_users" Relationship="Self.FK__tb_commen__user___611C5D5B" FromRole="tb_comments" ToRole="tb_users" />
+    <NavigationProperty Name="tb_users" Relationship="Self.FK__tb_commen__user___7F2BE32F" FromRole="tb_comments" ToRole="tb_users" />
   </EntityType>
   <EntityType Name="tb_friend_links">
     <Key>
@@ -104,7 +104,7 @@
     <Property Name="user_login_count" Type="Int64" />
     <Property Name="user_login_time" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tb_articles" Relationship="Self.FK__tb_articl__user___095F58DF" FromRole="tb_users" ToRole="tb_articles" />
-    <NavigationProperty Name="tb_comments" Relationship="Self.FK__tb_commen__user___611C5D5B" FromRole="tb_users" ToRole="tb_comments" />
+    <NavigationProperty Name="tb_comments" Relationship="Self.FK__tb_commen__user___7F2BE32F" FromRole="tb_users" ToRole="tb_comments" />
   </EntityType>
   <Association Name="FK__tb_articl__user___095F58DF">
     <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
@@ -118,7 +118,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tb_commen__user___611C5D5B">
+  <Association Name="FK__tb_commen__user___7F2BE32F">
     <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
     <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
     <ReferentialConstraint>
@@ -144,7 +144,7 @@
       <End Role="tb_users" EntitySet="tb_users" />
       <End Role="tb_articles" EntitySet="tb_articles" />
     </AssociationSet>
-    <AssociationSet Name="FK__tb_commen__user___611C5D5B" Association="Self.FK__tb_commen__user___611C5D5B">
+    <AssociationSet Name="FK__tb_commen__user___7F2BE32F" Association="Self.FK__tb_commen__user___7F2BE32F">
       <End Role="tb_users" EntitySet="tb_users" />
       <End Role="tb_comments" EntitySet="tb_comments" />
     </AssociationSet>

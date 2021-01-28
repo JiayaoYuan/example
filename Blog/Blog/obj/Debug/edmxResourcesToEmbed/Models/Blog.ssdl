@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="db_BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="bds260192421_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="tb_announcement">
     <Key>
       <PropertyRef Name="announce_id" />
@@ -114,7 +114,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__tb_commen__user___611C5D5B">
+  <Association Name="FK__tb_commen__user___7F2BE32F">
     <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
     <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
     <ReferentialConstraint>
@@ -126,7 +126,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="db_BlogModelStoreContainer">
+  <EntityContainer Name="bds260192421_dbModelStoreContainer">
     <EntitySet Name="tb_announcement" EntityType="Self.tb_announcement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_articles" EntityType="Self.tb_articles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_comments" EntityType="Self.tb_comments" Schema="dbo" store:Type="Tables" />
@@ -140,7 +140,7 @@
       <End Role="tb_users" EntitySet="tb_users" />
       <End Role="tb_articles" EntitySet="tb_articles" />
     </AssociationSet>
-    <AssociationSet Name="FK__tb_commen__user___611C5D5B" Association="Self.FK__tb_commen__user___611C5D5B">
+    <AssociationSet Name="FK__tb_commen__user___7F2BE32F" Association="Self.FK__tb_commen__user___7F2BE32F">
       <End Role="tb_users" EntitySet="tb_users" />
       <End Role="tb_comments" EntitySet="tb_comments" />
     </AssociationSet>

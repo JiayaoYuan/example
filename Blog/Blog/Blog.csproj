@@ -154,47 +154,47 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\blog.Context.cs">
+    <Compile Include="Models\Blog.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>blog.Context.tt</DependentUpon>
+      <DependentUpon>Blog.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\blog.cs">
+    <Compile Include="Models\Blog.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\blog.Designer.cs">
+    <Compile Include="Models\Blog.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>blog.edmx</DependentUpon>
+      <DependentUpon>Blog.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_announcement.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_articles.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_comments.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_friend_links.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_labels.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_set_article_label.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_set_article_sort.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_sorts.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tb_users.cs">
-      <DependentUpon>blog.tt</DependentUpon>
+      <DependentUpon>Blog.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tools\Handler.ashx.cs">
@@ -799,23 +799,23 @@
     <Content Include="Content\lib\ueditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Content\lib\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\lib\ueditor\third-party\video-js\font\vjs.woff" />
-    <Content Include="Models\blog.Context.tt">
+    <Content Include="Models\Blog.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>blog.edmx</DependentUpon>
-      <LastGenOutput>blog.Context.cs</LastGenOutput>
+      <DependentUpon>Blog.edmx</DependentUpon>
+      <LastGenOutput>Blog.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\blog.tt">
+    <Content Include="Models\Blog.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>blog.edmx</DependentUpon>
-      <LastGenOutput>blog.cs</LastGenOutput>
+      <DependentUpon>Blog.edmx</DependentUpon>
+      <LastGenOutput>Blog.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
-    <EntityDeploy Include="Models\blog.edmx">
+    <EntityDeploy Include="Models\Blog.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>blog.Designer.cs</LastGenOutput>
+      <LastGenOutput>Blog.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\blog.edmx.diagram">
-      <DependentUpon>blog.edmx</DependentUpon>
+    <Content Include="Models\Blog.edmx.diagram">
+      <DependentUpon>Blog.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />

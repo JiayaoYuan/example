@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="db_BlogModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="bds260192421_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tb_announcement">
           <Key>
             <PropertyRef Name="announce_id" />
@@ -119,7 +119,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tb_commen__user___611C5D5B">
+        <Association Name="FK__tb_commen__user___7F2BE32F">
           <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
           <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,7 +131,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="db_BlogModelStoreContainer">
+        <EntityContainer Name="bds260192421_dbModelStoreContainer">
           <EntitySet Name="tb_announcement" EntityType="Self.tb_announcement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_articles" EntityType="Self.tb_articles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_comments" EntityType="Self.tb_comments" Schema="dbo" store:Type="Tables" />
@@ -145,7 +145,7 @@
             <End Role="tb_users" EntitySet="tb_users" />
             <End Role="tb_articles" EntitySet="tb_articles" />
           </AssociationSet>
-          <AssociationSet Name="FK__tb_commen__user___611C5D5B" Association="Self.FK__tb_commen__user___611C5D5B">
+          <AssociationSet Name="FK__tb_commen__user___7F2BE32F" Association="Self.FK__tb_commen__user___7F2BE32F">
             <End Role="tb_users" EntitySet="tb_users" />
             <End Role="tb_comments" EntitySet="tb_comments" />
           </AssociationSet>
@@ -154,7 +154,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="db_BlogModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="bds260192421_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tb_announcement">
           <Key>
             <PropertyRef Name="announce_id" />
@@ -192,7 +192,7 @@
           <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="parent_comment_id" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="tb_users" Relationship="Self.FK__tb_commen__user___611C5D5B" FromRole="tb_comments" ToRole="tb_users" />
+          <NavigationProperty Name="tb_users" Relationship="Self.FK__tb_commen__user___7F2BE32F" FromRole="tb_comments" ToRole="tb_users" />
         </EntityType>
         <EntityType Name="tb_friend_links">
           <Key>
@@ -259,7 +259,7 @@
           <Property Name="user_login_count" Type="Int64" />
           <Property Name="user_login_time" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tb_articles" Relationship="Self.FK__tb_articl__user___095F58DF" FromRole="tb_users" ToRole="tb_articles" />
-          <NavigationProperty Name="tb_comments" Relationship="Self.FK__tb_commen__user___611C5D5B" FromRole="tb_users" ToRole="tb_comments" />
+          <NavigationProperty Name="tb_comments" Relationship="Self.FK__tb_commen__user___7F2BE32F" FromRole="tb_users" ToRole="tb_comments" />
         </EntityType>
         <Association Name="FK__tb_articl__user___095F58DF">
           <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
@@ -273,7 +273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tb_commen__user___611C5D5B">
+        <Association Name="FK__tb_commen__user___7F2BE32F">
           <End Role="tb_users" Type="Self.tb_users" Multiplicity="0..1" />
           <End Role="tb_comments" Type="Self.tb_comments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -299,7 +299,7 @@
             <End Role="tb_users" EntitySet="tb_users" />
             <End Role="tb_articles" EntitySet="tb_articles" />
           </AssociationSet>
-          <AssociationSet Name="FK__tb_commen__user___611C5D5B" Association="Self.FK__tb_commen__user___611C5D5B">
+          <AssociationSet Name="FK__tb_commen__user___7F2BE32F" Association="Self.FK__tb_commen__user___7F2BE32F">
             <End Role="tb_users" EntitySet="tb_users" />
             <End Role="tb_comments" EntitySet="tb_comments" />
           </AssociationSet>
@@ -309,9 +309,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="db_BlogModelStoreContainer" CdmEntityContainer="db_BlogEntities">
+        <EntityContainerMapping StorageEntityContainer="bds260192421_dbModelStoreContainer" CdmEntityContainer="db_BlogEntities">
           <EntitySetMapping Name="tb_announcement">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_announcement">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_announcement">
               <MappingFragment StoreEntitySet="tb_announcement">
                 <ScalarProperty Name="announce_id" ColumnName="announce_id" />
                 <ScalarProperty Name="announce_title" ColumnName="announce_title" />
@@ -321,7 +321,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_articles">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_articles">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_articles">
               <MappingFragment StoreEntitySet="tb_articles">
                 <ScalarProperty Name="article_id" ColumnName="article_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
@@ -338,7 +338,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_comments">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_comments">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_comments">
               <MappingFragment StoreEntitySet="tb_comments">
                 <ScalarProperty Name="comment_id" ColumnName="comment_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
@@ -351,7 +351,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_friend_links">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_friend_links">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_friend_links">
               <MappingFragment StoreEntitySet="tb_friend_links">
                 <ScalarProperty Name="friend_link_id" ColumnName="friend_link_id" />
                 <ScalarProperty Name="friend_links" ColumnName="friend_links" />
@@ -362,7 +362,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_labels">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_labels">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_labels">
               <MappingFragment StoreEntitySet="tb_labels">
                 <ScalarProperty Name="label_id" ColumnName="label_id" />
                 <ScalarProperty Name="label_name" ColumnName="label_name" />
@@ -372,7 +372,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_set_article_label">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_label">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_set_article_label">
               <MappingFragment StoreEntitySet="tb_set_article_label">
                 <ScalarProperty Name="set_article_label_id" ColumnName="set_article_label_id" />
                 <ScalarProperty Name="article_id" ColumnName="article_id" />
@@ -381,7 +381,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_set_article_sort">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_sort">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_set_article_sort">
               <MappingFragment StoreEntitySet="tb_set_article_sort">
                 <ScalarProperty Name="set_article_sort_id" ColumnName="set_article_sort_id" />
                 <ScalarProperty Name="article_id" ColumnName="article_id" />
@@ -390,7 +390,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_sorts">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_sorts">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_sorts">
               <MappingFragment StoreEntitySet="tb_sorts">
                 <ScalarProperty Name="sort_id" ColumnName="sort_id" />
                 <ScalarProperty Name="sort_name" ColumnName="sort_name" />
@@ -401,7 +401,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tb_users">
-            <EntityTypeMapping TypeName="db_BlogModel.tb_users">
+            <EntityTypeMapping TypeName="bds260192421_dbModel.tb_users">
               <MappingFragment StoreEntitySet="tb_users">
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="user_ip" ColumnName="user_ip" />

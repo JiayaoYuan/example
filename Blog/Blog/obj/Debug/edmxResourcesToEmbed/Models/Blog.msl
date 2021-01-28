@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="db_BlogModelStoreContainer" CdmEntityContainer="db_BlogEntities">
+  <EntityContainerMapping StorageEntityContainer="bds260192421_dbModelStoreContainer" CdmEntityContainer="db_BlogEntities">
     <EntitySetMapping Name="tb_announcement">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_announcement">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_announcement">
         <MappingFragment StoreEntitySet="tb_announcement">
           <ScalarProperty Name="announce_id" ColumnName="announce_id" />
           <ScalarProperty Name="announce_title" ColumnName="announce_title" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_articles">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_articles">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_articles">
         <MappingFragment StoreEntitySet="tb_articles">
           <ScalarProperty Name="article_id" ColumnName="article_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
@@ -29,7 +29,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_comments">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_comments">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_comments">
         <MappingFragment StoreEntitySet="tb_comments">
           <ScalarProperty Name="comment_id" ColumnName="comment_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
@@ -42,7 +42,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_friend_links">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_friend_links">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_friend_links">
         <MappingFragment StoreEntitySet="tb_friend_links">
           <ScalarProperty Name="friend_link_id" ColumnName="friend_link_id" />
           <ScalarProperty Name="friend_links" ColumnName="friend_links" />
@@ -53,7 +53,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_labels">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_labels">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_labels">
         <MappingFragment StoreEntitySet="tb_labels">
           <ScalarProperty Name="label_id" ColumnName="label_id" />
           <ScalarProperty Name="label_name" ColumnName="label_name" />
@@ -63,7 +63,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_set_article_label">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_label">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_set_article_label">
         <MappingFragment StoreEntitySet="tb_set_article_label">
           <ScalarProperty Name="set_article_label_id" ColumnName="set_article_label_id" />
           <ScalarProperty Name="article_id" ColumnName="article_id" />
@@ -72,7 +72,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_set_article_sort">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_set_article_sort">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_set_article_sort">
         <MappingFragment StoreEntitySet="tb_set_article_sort">
           <ScalarProperty Name="set_article_sort_id" ColumnName="set_article_sort_id" />
           <ScalarProperty Name="article_id" ColumnName="article_id" />
@@ -81,7 +81,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_sorts">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_sorts">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_sorts">
         <MappingFragment StoreEntitySet="tb_sorts">
           <ScalarProperty Name="sort_id" ColumnName="sort_id" />
           <ScalarProperty Name="sort_name" ColumnName="sort_name" />
@@ -92,7 +92,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tb_users">
-      <EntityTypeMapping TypeName="db_BlogModel.tb_users">
+      <EntityTypeMapping TypeName="bds260192421_dbModel.tb_users">
         <MappingFragment StoreEntitySet="tb_users">
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="user_ip" ColumnName="user_ip" />
